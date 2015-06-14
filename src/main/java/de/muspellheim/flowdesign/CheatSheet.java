@@ -46,6 +46,53 @@ public class CheatSheet {
     }
 
     /**
+     * Mehrere Input-Pins werden als Tupel zusammengefasst.
+     */
+    public <T, U> void a(Tuple<T, U> input) {
+        // ...
+    }
+
+    /**
+     * Mehrere Output-Pins werden als Tupel zusammengefasst.
+     */
+    public <T, U> Tuple<T, U> a() {
+        Tuple<T, U> t = null;
+        // ...
+        return t;
+    }
+
+    /**
+     * Mehrere Output-Pins werden als Output-Parameter angegeben.
+     */
+    public <T, U> void a(T t, U u) {
+        // ...
+    }
+
+    /**
+     * Splits und Joins.
+     */
+    public <T, S, U, V> void splitAndJoin() {
+        T t = null;
+        U u = null;
+        a(t, u);
+
+        S s = b(t);
+        V v = c(u);
+
+        d(new Tuple<>(s, v));
+    }
+
+    public <T, U> U c(T input) {
+        U u = null;
+        // ...
+        return u;
+    }
+
+    public <S, V> void d(Tuple<S, V> input) {
+        // ...
+    }
+
+    /**
      * Eine Functional-Unit als Klasse. Diese FU ist ein Part.
      *
      * @param <T> Typ des Inputs.
