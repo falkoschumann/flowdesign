@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Tuple<T, S> {
 
-    public final T first;
-    public final S second;
+    private final T first;
+    private final S second;
 
     public Tuple(T first, S second) {
         this.first = first;
