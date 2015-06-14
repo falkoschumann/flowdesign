@@ -93,6 +93,36 @@ public class CheatSheet {
     }
 
     /**
+     * Verbindungen zwischen Functional-Units herstellen.
+     */
+    public void wiring() {
+        A a = new A();
+        B b = new B();
+        a.connectResult(b::process);
+    }
+
+    public void wiringSplit() {
+        A a = new A();
+        B b = new B();
+        C c = new C();
+
+        a.connectResult(b::process);
+        a.connectResult(c::process);
+    }
+
+    public <T, U> void wiringJoin() {
+        Join<T, U> j = new Join<>();
+        A<Void, T> a = new A();
+        B<Void, U> b = new B();
+        C<Tuple<T, U>, Void> c = new C();
+
+        a.connectResult(j::input1);
+        b.connectResult(j::input2);
+
+        j.connectOutput(c::process);
+    }
+
+    /**
      * Eine Functional-Unit als Klasse. Diese FU ist ein Part.
      *
      * @param <T> Typ des Inputs.
@@ -106,11 +136,11 @@ public class CheatSheet {
             // ...
         }
 
-        public void addResultPin(Consumer<U> c) {
+        public void connectResult(Consumer<U> c) {
             consumers.add(c);
         }
 
-        public void removeResultPin(Consumer<U> c) {
+        public void disconnectResult(Consumer<U> c) {
             consumers.remove(c);
         }
 
@@ -134,19 +164,19 @@ public class CheatSheet {
 
         public X(A<T, S> a, B<S, U> b) {
             process = a::process;
-            a.addResultPin(b::process);
-            b.addResultPin(this::publishResult);
+            a.connectResult(b::process);
+            b.connectResult(this::publishResult);
         }
 
         public void process(T input) {
             process.accept(input);
         }
 
-        public void addResultPin(Consumer<U> c) {
+        public void connectResult(Consumer<U> c) {
             consumers.add(c);
         }
 
-        public void removeResultPin(Consumer<U> c) {
+        public void disconnectResult(Consumer<U> c) {
             consumers.remove(c);
         }
 
@@ -164,16 +194,80 @@ public class CheatSheet {
             // ...
         }
 
-        public void addResultPin(Consumer<U> c) {
+        public void connectResult(Consumer<U> c) {
             consumers.add(c);
         }
 
-        public void removeResultPin(Consumer<U> c) {
+        public void disconnectResult(Consumer<U> c) {
             consumers.remove(c);
         }
 
         private void publishResult(U u) {
             consumers.forEach(c -> c.accept(u));
+        }
+
+    }
+
+    public static class C<T, U> {
+
+        private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
+
+        public void process(T input) {
+            // ...
+        }
+
+        public void connectResult(Consumer<U> c) {
+            consumers.add(c);
+        }
+
+        public void disconnectResult(Consumer<U> c) {
+            consumers.remove(c);
+        }
+
+        private void publishResult(U u) {
+            consumers.forEach(c -> c.accept(u));
+        }
+
+    }
+
+    /**
+     * Eine Functional-Unit mit mehreren Input-Pins und Output-Pins.
+     */
+    public static class File<T, S, U, V> {
+
+        private final List<Consumer<U>> errorConsumers = new CopyOnWriteArrayList<>();
+        private final List<Consumer<V>> dataLoadedConsumers = new CopyOnWriteArrayList<>();
+
+        public void load(T input) {
+            // ...
+        }
+
+        public void store(S input) {
+            // ...
+        }
+
+        public void connectError(Consumer<U> c) {
+            errorConsumers.add(c);
+        }
+
+        public void disconnectError(Consumer<U> c) {
+            errorConsumers.remove(c);
+        }
+
+        private void publishError(U u) {
+            errorConsumers.forEach(c -> c.accept(u));
+        }
+
+        public void connectDataLoaded(Consumer<V> c) {
+            dataLoadedConsumers.add(c);
+        }
+
+        public void disconnectDataLoaded(Consumer<V> c) {
+            dataLoadedConsumers.remove(c);
+        }
+
+        private void publishDataLoaded(V u) {
+            dataLoadedConsumers.forEach(c -> c.accept(u));
         }
 
     }
