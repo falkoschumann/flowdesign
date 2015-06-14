@@ -1,4 +1,6 @@
-package de.muspellheim.flowdesign;
+package de.muspellheim.flowdesign.cheatsheet;
+
+import de.muspellheim.flowdesign.*;
 
 import java.util.Arrays;
 import java.util.List;

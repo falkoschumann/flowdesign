@@ -1,4 +1,9 @@
-package de.muspellheim.flowdesign;
+package de.muspellheim.flowdesign.cheatsheet;
+
+import de.muspellheim.flowdesign.Configurable;
+import de.muspellheim.flowdesign.DependsOn;
+import de.muspellheim.flowdesign.EntryPoint;
+import de.muspellheim.flowdesign.FunctionalUnitSupport;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
