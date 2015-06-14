@@ -129,7 +129,7 @@ public class CheatSheet {
      * @param <T> Typ des Inputs.
      * @param <U> Typ des Outputs.
      */
-    public static class A<T, U> {
+    public static class A<T, U> implements EntryPoint {
 
         private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
 
@@ -147,6 +147,11 @@ public class CheatSheet {
 
         private void publishResult(U u) {
             consumers.forEach(c -> c.accept(u));
+        }
+
+        @Override
+        public void run(String[] args) {
+            // ....
         }
 
     }
