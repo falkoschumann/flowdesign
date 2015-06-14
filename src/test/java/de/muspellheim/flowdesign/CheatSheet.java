@@ -129,24 +129,11 @@ public class CheatSheet {
      * @param <T> Typ des Inputs.
      * @param <U> Typ des Outputs.
      */
-    public static class A<T, U> implements EntryPoint, Configurable<String[]> {
+    public static class A<T, U> extends FunctionalUnitSupport<T, U> implements EntryPoint, Configurable<String[]> {
 
-        private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
-
+        @Override
         public void process(T input) {
             // ...
-        }
-
-        public void connectResult(Consumer<U> c) {
-            consumers.add(c);
-        }
-
-        public void disconnectResult(Consumer<U> c) {
-            consumers.remove(c);
-        }
-
-        private void publishResult(U u) {
-            consumers.forEach(c -> c.accept(u));
         }
 
         @Override
@@ -167,13 +154,11 @@ public class CheatSheet {
      * @param <T> Typ des Inputs.
      * @param <U> Typ des Outputs.
      */
-    public static class X<T, S, U> {
-
-        private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
+    public static class X<T, U> extends FunctionalUnitSupport<T, U> {
 
         private Consumer<T> process;
 
-        public X(A<T, S> a, B<S, U> b) {
+        public <S> X(A<T, S> a, B<S, U> b) {
             process = a::process;
             a.connectResult(b::process);
             b.connectResult(this::publishResult);
@@ -183,45 +168,17 @@ public class CheatSheet {
             process.accept(input);
         }
 
-        public void connectResult(Consumer<U> c) {
-            consumers.add(c);
-        }
-
-        public void disconnectResult(Consumer<U> c) {
-            consumers.remove(c);
-        }
-
-        private void publishResult(U u) {
-            consumers.forEach(c -> c.accept(u));
-        }
-
     }
 
-    public static class B<S, U> {
-
-        private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
+    public static class B<S, U> extends FunctionalUnitSupport<S, U> {
 
         public void process(S input) {
             // ...
         }
 
-        public void connectResult(Consumer<U> c) {
-            consumers.add(c);
-        }
-
-        public void disconnectResult(Consumer<U> c) {
-            consumers.remove(c);
-        }
-
-        private void publishResult(U u) {
-            consumers.forEach(c -> c.accept(u));
-        }
-
     }
 
-    public static class C<T, U, S> implements DependsOn<S> {
-
-        private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
+    public static class C<T, U, S> extends FunctionalUnitSupport<T, U> implements DependsOn<S> {
 
         private S s;
 
@@ -229,21 +186,9 @@ public class CheatSheet {
             // ...
         }
 
-        public void connectResult(Consumer<U> c) {
-            consumers.add(c);
-        }
-
-        public void disconnectResult(Consumer<U> c) {
-            consumers.remove(c);
-        }
-
-        private void publishResult(U u) {
-            consumers.forEach(c -> c.accept(u));
-        }
-
         @Override
         public void inject(S object) {
-            s  = object;
+            s = object;
         }
 
     }
@@ -253,8 +198,8 @@ public class CheatSheet {
      */
     public static class File<T, S, U, V> {
 
-        private final List<Consumer<U>> errorConsumers = new CopyOnWriteArrayList<>();
-        private final List<Consumer<V>> dataLoadedConsumers = new CopyOnWriteArrayList<>();
+        private final FunctionalUnitSupport<?, U> errors = new FunctionalUnitSupport<>();
+        private final FunctionalUnitSupport<?, V> dataLoaded = new FunctionalUnitSupport<>();
 
         public void load(T input) {
             // ...
@@ -265,72 +210,44 @@ public class CheatSheet {
         }
 
         public void connectError(Consumer<U> c) {
-            errorConsumers.add(c);
+            errors.connectResult(c);
         }
 
         public void disconnectError(Consumer<U> c) {
-            errorConsumers.remove(c);
+            errors.disconnectResult(c);
         }
 
         private void publishError(U u) {
-            errorConsumers.forEach(c -> c.accept(u));
+            errors.publishResult(u);
         }
 
         public void connectDataLoaded(Consumer<V> c) {
-            dataLoadedConsumers.add(c);
+            dataLoaded.connectResult(c);
         }
 
         public void disconnectDataLoaded(Consumer<V> c) {
-            dataLoadedConsumers.remove(c);
+            dataLoaded.disconnectResult(c);
         }
 
-        private void publishDataLoaded(V u) {
-            dataLoadedConsumers.forEach(c -> c.accept(u));
+        private void publishDataLoaded(V v) {
+            dataLoaded.publishResult(v);
         }
 
     }
 
-    public static class SplitLineIntoWords {
-
-        private final List<Consumer<String>> consumers = new CopyOnWriteArrayList<>();
+    public static class SplitLineIntoWords extends FunctionalUnitSupport<String, String> {
 
         public void process(String line) {
             for (String word : line.split(" "))
                 publishResult(word);
         }
 
-        public void connectResult(Consumer<String> c) {
-            consumers.add(c);
-        }
-
-        public void disconnectResult(Consumer<String> c) {
-            consumers.remove(c);
-        }
-
-        private void publishResult(String s) {
-            consumers.forEach(c -> c.accept(s));
-        }
-
     }
 
-    public static class SplitLineIntoWordsVariant {
-
-        private final List<Consumer<Iterable<String>>> consumers = new CopyOnWriteArrayList<>();
+    public static class SplitLineIntoWordsVariant extends FunctionalUnitSupport<String, Iterable<String>> {
 
         public void process(String line) {
             publishResult(Arrays.asList(line.split(" ")));
-        }
-
-        public void connectResult(Consumer<Iterable<String>> c) {
-            consumers.add(c);
-        }
-
-        public void disconnectResult(Consumer<Iterable<String>> c) {
-            consumers.remove(c);
-        }
-
-        private void publishResult(Iterable<String> s) {
-            consumers.forEach(c -> c.accept(s));
         }
 
     }

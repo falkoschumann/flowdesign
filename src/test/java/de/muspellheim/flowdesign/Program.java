@@ -55,7 +55,7 @@ public class Program {
 
     }
 
-    private static class A<T, S> extends Fu<T, S> implements Configurable<String[]> {
+    private static class A<T, S> extends FunctionalUnitSupport<T, S> implements Configurable<String[]> {
 
         @Override
         public void process(T t) {
@@ -69,7 +69,7 @@ public class Program {
 
     }
 
-    private static class B<S, U> extends Fu<S, U> implements DependsOn<R> {
+    private static class B<S, U> extends FunctionalUnitSupport<S, U> implements DependsOn<R> {
 
         @Override
         public void process(S s) {
@@ -83,7 +83,7 @@ public class Program {
 
     }
 
-    private static class X<T, U> extends Fu<T, U> {
+    private static class X<T, U> extends FunctionalUnitSupport<T, U> {
 
         private List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
 
@@ -97,26 +97,6 @@ public class Program {
 
         public void process(T t) {
             process.accept(t);
-        }
-
-    }
-
-    private static abstract class Fu<T, U> {
-
-        private List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
-
-        public abstract void process(T t);
-
-        public void connectResult(Consumer<U> c) {
-            consumers.add(c);
-        }
-
-        public void disconnectResult(Consumer<U> c) {
-            consumers.remove(c);
-        }
-
-        protected void publishResult(U r) {
-            consumers.forEach(c -> c.accept(r));
         }
 
     }

@@ -1,12 +1,10 @@
 package de.muspellheim.flowdesign;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 public class Join<T, U> {
 
-    private final List<Consumer<Tuple<T, U>>> consumers = new CopyOnWriteArrayList<>();
+    private final FunctionalUnitSupport<?, Tuple<T, U>> consumers = new FunctionalUnitSupport<>();
 
     private T t;
     private U u;
@@ -18,7 +16,7 @@ public class Join<T, U> {
 
     private synchronized void tryJoin() {
         if (t != null && u != null) {
-            publishResult(new Tuple<>(t, u));
+            consumers.publishResult(new Tuple<>(t, u));
             t = null;
             u = null;
         }
@@ -30,15 +28,11 @@ public class Join<T, U> {
     }
 
     public void connectOutput(Consumer<Tuple<T, U>> c) {
-        consumers.add(c);
+        consumers.connectResult(c);
     }
 
     public void disconnectOutput(Consumer<Tuple<T, U>> c) {
-        consumers.remove(c);
-    }
-
-    private void publishResult(Tuple<T, U> t) {
-        consumers.forEach(c -> c.accept(t));
+        consumers.disconnectResult(c);
     }
 
 }
