@@ -1,7 +1,7 @@
 package de.muspellheim.flowdesign;
 
-public interface Configurable {
+public interface Configurable<T> {
 
-    void configure(String[] args);
+    void configure(T configuration);
 
 }

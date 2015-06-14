@@ -129,7 +129,7 @@ public class CheatSheet {
      * @param <T> Typ des Inputs.
      * @param <U> Typ des Outputs.
      */
-    public static class A<T, U> implements EntryPoint, Configurable {
+    public static class A<T, U> implements EntryPoint, Configurable<String[]> {
 
         private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
 

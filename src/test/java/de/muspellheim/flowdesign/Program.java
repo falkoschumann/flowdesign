@@ -55,7 +55,7 @@ public class Program {
 
     }
 
-    private static class A<T, S> extends Fu<T, S> implements Configurable {
+    private static class A<T, S> extends Fu<T, S> implements Configurable<String[]> {
 
         @Override
         public void process(T t) {
