@@ -7,19 +7,17 @@ import java.util.function.Consumer;
 
 public class FunctionalUnitSupport<T, U> {
 
+    private static final Consumer NOP = o -> {};
+
     private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
     private final Consumer<T> process;
 
     public FunctionalUnitSupport() {
-        this(FunctionalUnitSupport::doNothing);
+        this(NOP);
     }
 
     public FunctionalUnitSupport(Consumer<T> process) {
         this.process = process;
-    }
-
-    private static void doNothing(Object o) {
-        // do nothing
     }
 
     public void process(T t) {

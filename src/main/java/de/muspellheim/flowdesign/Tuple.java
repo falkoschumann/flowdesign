@@ -2,14 +2,22 @@ package de.muspellheim.flowdesign;
 
 import java.util.Objects;
 
-public class Tuple<T, U> {
+public class Tuple<T, S> {
 
-    public final T t;
-    public final U u;
+    public final T first;
+    public final S second;
 
-    public Tuple(T t, U u) {
-        this.t = t;
-        this.u = u;
+    public Tuple(T first, S second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    public T getFirst() {
+        return first;
+    }
+
+    public S getSecond() {
+        return second;
     }
 
     @Override
@@ -17,12 +25,17 @@ public class Tuple<T, U> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tuple<?, ?> tuple = (Tuple<?, ?>) o;
-        return Objects.equals(t, tuple.t) && Objects.equals(u, tuple.u);
+        return Objects.equals(first, tuple.first) && Objects.equals(second, tuple.second);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(t, u);
+        return Objects.hash(first, second);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + getFirst() + ", " + getSecond() + ")";
     }
 
 }

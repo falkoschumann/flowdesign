@@ -2,36 +2,36 @@ package de.muspellheim.flowdesign;
 
 import java.util.function.Consumer;
 
-public class Join<T, U> {
+public class Join<T, S> {
 
-    private final FunctionalUnitSupport<?, Tuple<T, U>> consumers = new FunctionalUnitSupport<>();
+    private final FunctionalUnitSupport<?, Tuple<T, S>> consumers = new FunctionalUnitSupport<>();
 
-    private T t;
-    private U u;
+    private T input1;
+    private S input2;
 
     public void input1(T input) {
-        t = input;
+        input1 = input;
+        tryJoin();
+    }
+
+    public void input2(S input) {
+        input2 = input;
         tryJoin();
     }
 
     private synchronized void tryJoin() {
-        if (t != null && u != null) {
-            consumers.publishResult(new Tuple<>(t, u));
-            t = null;
-            u = null;
+        if (input1 != null && input2 != null) {
+            consumers.publishResult(new Tuple<>(input1, input2));
+            input1 = null;
+            input2 = null;
         }
     }
 
-    public void input2(U input) {
-        u = input;
-        tryJoin();
-    }
-
-    public void connectOutput(Consumer<Tuple<T, U>> c) {
+    public void connectOutput(Consumer<Tuple<T, S>> c) {
         consumers.connectResult(c);
     }
 
-    public void disconnectOutput(Consumer<Tuple<T, U>> c) {
+    public void disconnectOutput(Consumer<Tuple<T, S>> c) {
         consumers.disconnectResult(c);
     }
 
