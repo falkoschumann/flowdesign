@@ -1,5 +1,6 @@
 package de.muspellheim.flowdesign;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
@@ -268,6 +269,51 @@ public class CheatSheet {
 
         private void publishDataLoaded(V u) {
             dataLoadedConsumers.forEach(c -> c.accept(u));
+        }
+
+    }
+
+    public static class SplitLineIntoWords {
+
+        private final List<Consumer<String>> consumers = new CopyOnWriteArrayList<>();
+
+        public void process(String line) {
+            for (String word : line.split(" "))
+                publishResult(word);
+        }
+
+        public void connectResult(Consumer<String> c) {
+            consumers.add(c);
+        }
+
+        public void disconnectResult(Consumer<String> c) {
+            consumers.remove(c);
+        }
+
+        private void publishResult(String s) {
+            consumers.forEach(c -> c.accept(s));
+        }
+
+    }
+
+    public static class SplitLineIntoWordsVariant {
+
+        private final List<Consumer<Iterable<String>>> consumers = new CopyOnWriteArrayList<>();
+
+        public void process(String line) {
+            publishResult(Arrays.asList(line.split(" ")));
+        }
+
+        public void connectResult(Consumer<Iterable<String>> c) {
+            consumers.add(c);
+        }
+
+        public void disconnectResult(Consumer<Iterable<String>> c) {
+            consumers.remove(c);
+        }
+
+        private void publishResult(Iterable<String> s) {
+            consumers.forEach(c -> c.accept(s));
         }
 
     }
