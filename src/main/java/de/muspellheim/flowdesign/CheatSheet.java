@@ -115,7 +115,7 @@ public class CheatSheet {
         Join<T, U> j = new Join<>();
         A<Void, T> a = new A();
         B<Void, U> b = new B();
-        C<Tuple<T, U>, Void> c = new C();
+        C<Tuple<T, U>, Void, Void> c = new C();
 
         a.connectResult(j::input1);
         b.connectResult(j::input2);
@@ -209,9 +209,11 @@ public class CheatSheet {
 
     }
 
-    public static class C<T, U> {
+    public static class C<T, U, S> implements DependsOn<S> {
 
         private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
+
+        private S s;
 
         public void process(T input) {
             // ...
@@ -227,6 +229,11 @@ public class CheatSheet {
 
         private void publishResult(U u) {
             consumers.forEach(c -> c.accept(u));
+        }
+
+        @Override
+        public void inject(S object) {
+            s  = object;
         }
 
     }
