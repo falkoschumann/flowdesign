@@ -21,7 +21,7 @@ public class Program {
 
         // (2) Bind
         gui.connectQuery(x::process);
-        x.connectResult(gui::display);
+        x.connectOutput(gui::display);
 
         // (3) Inject
         b.inject(r);
@@ -63,7 +63,7 @@ public class Program {
     private static class A<T, S> extends FunctionalUnitSupport<T, S> implements Configurable<String[]> {
 
         @Override
-        public void process(T t) {
+        public void process(T input) {
             // ...
         }
 
@@ -77,7 +77,7 @@ public class Program {
     private static class B<S, U> extends FunctionalUnitSupport<S, U> implements DependsOn<R> {
 
         @Override
-        public void process(S s) {
+        public void process(S input) {
             // ...
         }
 
@@ -96,12 +96,12 @@ public class Program {
 
         public <S> X(A<T, S> a, B<S, U> b) {
             process = a::process;
-            a.connectResult(b::process);
-            b.connectResult(this::publishResult);
+            a.connectOutput(b::process);
+            b.connectOutput(this::publishResult);
         }
 
-        public void process(T t) {
-            process.accept(t);
+        public void process(T input) {
+            process.accept(input);
         }
 
     }

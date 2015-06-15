@@ -11,37 +11,38 @@ import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
-public class FunctionalUnitSupport<T, U> {
+public class FunctionalUnitSupport<IN, OUT> {
 
-    private static final Consumer NOP = o -> {};
+    private static final Consumer NOP = in -> {};
 
-    private final List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
-    private final Consumer<T> process;
+    private final List<Consumer<OUT>> consumers = new CopyOnWriteArrayList<>();
+    private final Consumer<IN> process;
 
     public FunctionalUnitSupport() {
         this(NOP);
     }
 
-    public FunctionalUnitSupport(Consumer<T> process) {
+    public FunctionalUnitSupport(Consumer<IN> process) {
+        Objects.requireNonNull(process, "process");
         this.process = process;
     }
 
-    public void process(T t) {
-        process.accept(t);
+    public void process(IN input) {
+        process.accept(input);
     }
 
-    public void connectResult(Consumer<U> c) {
-        Objects.requireNonNull(c);
-        consumers.add(c);
+    public void connectOutput(Consumer<OUT> consumer) {
+        Objects.requireNonNull(consumer);
+        consumers.add(consumer);
     }
 
-    public void disconnectResult(Consumer<U> c) {
-        Objects.requireNonNull(c);
-        consumers.remove(c);
+    public void disconnectOutput(Consumer<OUT> consumer) {
+        Objects.requireNonNull(consumer);
+        consumers.remove(consumer);
     }
 
-    public void publishResult(U r) {
-        consumers.forEach(c -> c.accept(r));
+    public void publishResult(OUT result) {
+        consumers.forEach(c -> c.accept(result));
     }
 
 }

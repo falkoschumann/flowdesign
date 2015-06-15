@@ -34,11 +34,11 @@ public class Join<T, S> {
     }
 
     public void connectOutput(Consumer<Tuple<T, S>> c) {
-        consumers.connectResult(c);
+        consumers.connectOutput(c);
     }
 
     public void disconnectOutput(Consumer<Tuple<T, S>> c) {
-        consumers.disconnectResult(c);
+        consumers.disconnectOutput(c);
     }
 
 }

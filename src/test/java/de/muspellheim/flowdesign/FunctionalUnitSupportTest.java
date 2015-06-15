@@ -30,7 +30,7 @@ public class FunctionalUnitSupportTest {
     @Test
     public void testOutputPin() {
         FunctionalUnitSupport<String, Integer> parser = new FunctionalUnitSupport<>();
-        parser.connectResult(this::setResult);
+        parser.connectOutput(this::setResult);
 
         parser.publishResult(42);
         assertEquals(42, result);
@@ -45,11 +45,11 @@ public class FunctionalUnitSupportTest {
         FunctionalUnitSupport<String, Integer> parser = new FunctionalUnitSupport<>();
         Consumer<Integer> consumer = this::setResult;
 
-        parser.connectResult(consumer);
+        parser.connectOutput(consumer);
         parser.publishResult(42);
         assertEquals(42, result);
 
-        parser.disconnectResult(consumer);
+        parser.disconnectOutput(consumer);
         parser.publishResult(13);
         assertEquals(42, result);
     }

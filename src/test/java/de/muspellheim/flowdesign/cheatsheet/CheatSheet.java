@@ -3,8 +3,6 @@ package de.muspellheim.flowdesign.cheatsheet;
 import de.muspellheim.flowdesign.*;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 /**
@@ -101,7 +99,7 @@ public class CheatSheet {
     public void wiring() {
         A a = new A();
         B b = new B();
-        a.connectResult(b::process);
+        a.connectOutput(b::process);
     }
 
     public void wiringSplit() {
@@ -109,8 +107,8 @@ public class CheatSheet {
         B b = new B();
         C c = new C();
 
-        a.connectResult(b::process);
-        a.connectResult(c::process);
+        a.connectOutput(b::process);
+        a.connectOutput(c::process);
     }
 
     public <T, U> void wiringJoin() {
@@ -119,8 +117,8 @@ public class CheatSheet {
         B<Void, U> b = new B();
         C<Tuple<T, U>, Void, Void> c = new C();
 
-        a.connectResult(j::input1);
-        b.connectResult(j::input2);
+        a.connectOutput(j::input1);
+        b.connectOutput(j::input2);
 
         j.connectOutput(c::process);
     }
@@ -162,8 +160,8 @@ public class CheatSheet {
 
         public <S> X(A<T, S> a, B<S, U> b) {
             process = a::process;
-            a.connectResult(b::process);
-            b.connectResult(this::publishResult);
+            a.connectOutput(b::process);
+            b.connectOutput(this::publishResult);
         }
 
         public void process(T input) {
@@ -212,11 +210,11 @@ public class CheatSheet {
         }
 
         public void connectError(Consumer<U> c) {
-            errors.connectResult(c);
+            errors.connectOutput(c);
         }
 
         public void disconnectError(Consumer<U> c) {
-            errors.disconnectResult(c);
+            errors.disconnectOutput(c);
         }
 
         private void publishError(U u) {
@@ -224,11 +222,11 @@ public class CheatSheet {
         }
 
         public void connectDataLoaded(Consumer<V> c) {
-            dataLoaded.connectResult(c);
+            dataLoaded.connectOutput(c);
         }
 
         public void disconnectDataLoaded(Consumer<V> c) {
-            dataLoaded.disconnectResult(c);
+            dataLoaded.disconnectOutput(c);
         }
 
         private void publishDataLoaded(V v) {
