@@ -80,7 +80,7 @@ public class CheatSheet {
         S s = b(t);
         V v = c(u);
 
-        d(new Tuple<>(s, v));
+        d(Tuple.of(s, v));
     }
 
     public <T, U> U c(T input) {

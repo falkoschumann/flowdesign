@@ -37,7 +37,7 @@ public class JoinTest {
         assertNull(tuple);
 
         join.input2(42);
-        assertEquals(new Tuple<>("Foo", 42), tuple);
+        assertEquals(Tuple.of("Foo", 42), tuple);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class JoinTest {
         assertNull(tuple);
 
         join.input1("Foo");
-        assertEquals(new Tuple<>("Foo", 42), tuple);
+        assertEquals(Tuple.of("Foo", 42), tuple);
     }
 
     @Test
@@ -64,6 +64,21 @@ public class JoinTest {
         join.disconnectOutput(output);
         join.input2(42);
         assertNull(tuple);
+    }
+
+    @Test
+    public void testJoinOnlyIfAllInputReceived() {
+        join.connectOutput(this::setTuple);
+        assertNull(tuple);
+
+        join.input1("Foo");
+        assertNull(tuple);
+
+        join.input1("Bar");
+        assertNull(tuple);
+
+        join.input2(42);
+        assertEquals(Tuple.of("Bar", 42), tuple);
     }
 
 }

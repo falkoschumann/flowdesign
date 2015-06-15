@@ -8,17 +8,28 @@ package de.muspellheim.flowdesign;
 
 import java.util.Objects;
 
-public class Tuple<T, S> {
+/**
+ * Ein Tupel aus zwei Werten. Ein Tupel ist ein Wertobjekt (Value Object).
+ *
+ * @param <F> der Typ des ersten Wertes.
+ * @param <S> der Typ des zweiten Wertes.
+ * @author Falko Schumann &lt;www.muspellheim.de&gt;
+ */
+public class Tuple<F, S> {
 
-    private final T first;
+    private final F first;
     private final S second;
 
-    public Tuple(T first, S second) {
+    protected Tuple(F first, S second) {
         this.first = first;
         this.second = second;
     }
 
-    public T getFirst() {
+    public static <F, S> Tuple<F, S> of(F first, S second) {
+        return new Tuple<>(first, second);
+    }
+
+    public F getFirst() {
         return first;
     }
 
