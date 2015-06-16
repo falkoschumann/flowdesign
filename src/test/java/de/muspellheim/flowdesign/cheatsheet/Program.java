@@ -5,8 +5,6 @@ import de.muspellheim.flowdesign.DependsOn;
 import de.muspellheim.flowdesign.EntryPoint;
 import de.muspellheim.flowdesign.FunctionalUnit;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 public class Program {
@@ -20,8 +18,8 @@ public class Program {
         X<T, U> x = new X<>(a, b);
 
         // (2) Bind
-        gui.connectQuery(x::process);
-        x.connectOutput(gui::display);
+        gui.connectQueryPinWith(x::process);
+        x.connectOutputPinWith(gui::display);
 
         // (3) Inject
         b.inject(r);
@@ -35,7 +33,7 @@ public class Program {
 
     private static class Gui<U, T> implements EntryPoint {
 
-        private List<Consumer<T>> queryConsumer = new CopyOnWriteArrayList<>();
+        private FunctionalUnit<U, T> delegate = new FunctionalUnit<>();
 
         @Override
         public void run(String[] args) {
@@ -46,12 +44,12 @@ public class Program {
             // ...
         }
 
-        public void connectQuery(Consumer<T> c) {
-            queryConsumer.add(c);
+        public void connectQueryPinWith(Consumer<T> inputPin) {
+            delegate.connectOutputPinWith(inputPin);
         }
 
-        public void disconnectQuery(Consumer<T> c) {
-            queryConsumer.remove(c);
+        public void disconnectQueryPinFrom(Consumer<T> inputPin) {
+            delegate.disconnectOutputPinFrom(inputPin);
         }
 
     }
@@ -90,14 +88,12 @@ public class Program {
 
     private static class X<T, U> extends FunctionalUnit<T, U> {
 
-        private List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
-
         private Consumer<T> process;
 
         public <S> X(A<T, S> a, B<S, U> b) {
             process = a::process;
-            a.connectOutput(b::process);
-            b.connectOutput(this::publishResult);
+            a.connectOutputPinWith(b::process);
+            b.connectOutputPinWith(this::publishResult);
         }
 
         public void process(T input) {

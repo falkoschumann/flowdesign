@@ -12,6 +12,8 @@ import java.util.function.Consumer;
  */
 public class CheatSheet {
 
+    // TODO Klasse splitten und besser organisieren
+
     /**
      * Eine Functional-Unit als Methode. Diese FU ist ein Part.
      *
@@ -99,7 +101,7 @@ public class CheatSheet {
     public void wiring() {
         A a = new A();
         B b = new B();
-        a.connectOutput(b::process);
+        a.connectOutputPinWith(b::process);
     }
 
     public void wiringSplit() {
@@ -107,8 +109,8 @@ public class CheatSheet {
         B b = new B();
         C c = new C();
 
-        a.connectOutput(b::process);
-        a.connectOutput(c::process);
+        a.connectOutputPinWith(b::process);
+        a.connectOutputPinWith(c::process);
     }
 
     public <T, U> void wiringJoin() {
@@ -117,10 +119,10 @@ public class CheatSheet {
         B<Void, U> b = new B();
         C<Tuple<T, U>, Void, Void> c = new C();
 
-        a.connectOutput(j::input1);
-        b.connectOutput(j::input2);
+        a.connectOutputPinWith(j::processInput1);
+        b.connectOutputPinWith(j::processInput2);
 
-        j.connectOutput(c::process);
+        j.connectOutputPinWith(c::process);
     }
 
     /**
@@ -160,8 +162,8 @@ public class CheatSheet {
 
         public <S> X(A<T, S> a, B<S, U> b) {
             process = a::process;
-            a.connectOutput(b::process);
-            b.connectOutput(this::publishResult);
+            a.connectOutputPinWith(b::process);
+            b.connectOutputPinWith(this::publishResult);
         }
 
         public void process(T input) {
@@ -210,11 +212,11 @@ public class CheatSheet {
         }
 
         public void connectError(Consumer<U> c) {
-            errors.connectOutput(c);
+            errors.connectOutputPinWith(c);
         }
 
         public void disconnectError(Consumer<U> c) {
-            errors.disconnectOutput(c);
+            errors.disconnectOutputPinFrom(c);
         }
 
         private void publishError(U u) {
@@ -222,11 +224,11 @@ public class CheatSheet {
         }
 
         public void connectDataLoaded(Consumer<V> c) {
-            dataLoaded.connectOutput(c);
+            dataLoaded.connectOutputPinWith(c);
         }
 
         public void disconnectDataLoaded(Consumer<V> c) {
-            dataLoaded.disconnectOutput(c);
+            dataLoaded.disconnectOutputPinFrom(c);
         }
 
         private void publishDataLoaded(V v) {

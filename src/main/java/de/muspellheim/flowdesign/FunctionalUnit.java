@@ -42,7 +42,7 @@ public class FunctionalUnit<IN, OUT> {
     }
 
     /**
-     * Nimmt einen Eingangswert entgegen und verarbeitet ihn. Der Verarbeitungsprozess kann durch überschreiben dieser
+     * Nimmt einen Eingangswert entgegen und verarbeitet ihn. Der Verarbeitungsprozess kann durch Überschreiben dieser
      * Methode oder durch Übergabe im Konstruktor festgelegt werden.
      */
     public void process(IN input) {
@@ -50,19 +50,19 @@ public class FunctionalUnit<IN, OUT> {
     }
 
     /**
-     * Verbinden den Outputpin dieser Functional-Unit mit dem Inputpin einer anderen Functional-Unit.
+     * Verbindet den Outputpin dieser Functional-Unit mit dem Inputpin einer anderen Functional-Unit.
      */
-    public void connectOutput(Consumer<OUT> consumer) {
-        Objects.requireNonNull(consumer);
-        consumers.add(consumer);
+    public void connectOutputPinWith(Consumer<OUT> inputPin) {
+        Objects.requireNonNull(inputPin);
+        consumers.add(inputPin);
     }
 
     /**
      * Trennt die Verbindung des Outputpins dieser Functional-Unit mit dem Inputpin einer anderen Functional-Unit.
      */
-    public void disconnectOutput(Consumer<OUT> consumer) {
-        Objects.requireNonNull(consumer);
-        consumers.remove(consumer);
+    public void disconnectOutputPinFrom(Consumer<OUT> inputPin) {
+        Objects.requireNonNull(inputPin);
+        consumers.remove(inputPin);
     }
 
     /**

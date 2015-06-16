@@ -27,7 +27,7 @@ public class Join<IN1, IN2> {
     /**
      * Nimmt den ersten Eingangswert entgegen und versucht ein Tupel zu veröffentlichen.
      */
-    public void input1(IN1 input) {
+    public void processInput1(IN1 input) {
         input1 = input;
         tryJoin();
     }
@@ -35,7 +35,7 @@ public class Join<IN1, IN2> {
     /**
      * Nimmt den zweiten Eingangswert entgegen und versucht ein Tupel zu veröffentlichen.
      */
-    public void input2(IN2 input) {
+    public void processInput2(IN2 input) {
         input2 = input;
         tryJoin();
     }
@@ -46,19 +46,12 @@ public class Join<IN1, IN2> {
         }
     }
 
-
-    /**
-     * Verbinden den Outputpin dieser Functional-Unit mit dem Inputpin einer anderen Functional-Unit.
-     */
-    public void connectOutput(Consumer<Tuple<IN1, IN2>> consumer) {
-        consumers.connectOutput(consumer);
+    public void connectOutputPinWith(Consumer<Tuple<IN1, IN2>> inputPin) {
+        consumers.connectOutputPinWith(inputPin);
     }
 
-    /**
-     * Trennt die Verbindung des Outputpins dieser Functional-Unit mit dem Inputpin einer anderen Functional-Unit.
-     */
-    public void disconnectOutput(Consumer<Tuple<IN1, IN2>> consumer) {
-        consumers.disconnectOutput(consumer);
+    public void disconnectOutputPinFrom(Consumer<Tuple<IN1, IN2>> inputPin) {
+        consumers.disconnectOutputPinFrom(inputPin);
     }
 
 }

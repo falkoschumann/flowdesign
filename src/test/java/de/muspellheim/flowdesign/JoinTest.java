@@ -30,54 +30,54 @@ public class JoinTest {
 
     @Test
     public void testJoinInput1ThenInput2() {
-        join.connectOutput(this::setTuple);
+        join.connectOutputPinWith(this::setTuple);
         assertNull(tuple);
 
-        join.input1("Foo");
+        join.processInput1("Foo");
         assertNull(tuple);
 
-        join.input2(42);
+        join.processInput2(42);
         assertEquals(Tuple.of("Foo", 42), tuple);
     }
 
     @Test
     public void testJoinInput2ThenInput1() {
-        join.connectOutput(this::setTuple);
+        join.connectOutputPinWith(this::setTuple);
         assertNull(tuple);
 
-        join.input2(42);
+        join.processInput2(42);
         assertNull(tuple);
 
-        join.input1("Foo");
+        join.processInput1("Foo");
         assertEquals(Tuple.of("Foo", 42), tuple);
     }
 
     @Test
     public void testJoinDisconnected() {
         Consumer<Tuple<String, Integer>> output = this::setTuple;
-        join.connectOutput(output);
+        join.connectOutputPinWith(output);
         assertNull(tuple);
 
-        join.input1("Foo");
+        join.processInput1("Foo");
         assertNull(tuple);
 
-        join.disconnectOutput(output);
-        join.input2(42);
+        join.disconnectOutputPinFrom(output);
+        join.processInput2(42);
         assertNull(tuple);
     }
 
     @Test
     public void testJoinOnlyIfAllInputReceived() {
-        join.connectOutput(this::setTuple);
+        join.connectOutputPinWith(this::setTuple);
         assertNull(tuple);
 
-        join.input1("Foo");
+        join.processInput1("Foo");
         assertNull(tuple);
 
-        join.input1("Bar");
+        join.processInput1("Bar");
         assertNull(tuple);
 
-        join.input2(42);
+        join.processInput2(42);
         assertEquals(Tuple.of("Bar", 42), tuple);
     }
 
