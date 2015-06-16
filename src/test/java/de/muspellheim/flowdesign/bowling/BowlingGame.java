@@ -11,6 +11,8 @@ import java.util.List;
 
 public class BowlingGame {
 
+    // TODO Code vereinfachen !!
+
     public static int calculateTotal(int... rolls) {
         List<Frame> frames = toFrames(rolls);
         frames = enrichFramesWithScore(frames);
