@@ -6,7 +6,7 @@
 
     <groupId>de.muspellheim</groupId>
     <artifactId>flowdesign</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <name>Flow-Design für Java</name>
     <description>Eine Java-Implementierung von Flow-Design.</description>
