@@ -19,7 +19,7 @@ import java.util.function.Consumer;
  */
 public class Join<IN1, IN2> {
 
-    private final FunctionalUnitSupport<?, Tuple<IN1, IN2>> consumers = new FunctionalUnitSupport<>();
+    private final FunctionalUnit<?, Tuple<IN1, IN2>> consumers = new FunctionalUnit<>();
 
     private IN1 input1;
     private IN2 input2;

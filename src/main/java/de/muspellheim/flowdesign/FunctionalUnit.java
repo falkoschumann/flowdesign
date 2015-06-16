@@ -12,14 +12,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 /**
- * Hilfsklasse für die Implementierung einer Functional-Unit. Die Klasse kann sowohl erweitert als auch gewrappt werden.
- * Beim Wrappen werden die Methoden delegiert.
+ * Hilfsklasse für die Implementierung einer Functional-Unit mit je einem Inputpin und Outputpin. Die Klasse kann sowohl
+ * erweitert als auch gewrappt werden. Beim Wrappen werden die Methoden delegiert.
  *
  * @param <IN>  der Typ des Inputpins, üblicherweise eine Struktur.
  * @param <OUT> der Typ des Outputpins, üblicherweise eine Struktur.
  * @author Falko Schumann &lt;www.muspellheim.de&gt;
  */
-public class FunctionalUnitSupport<IN, OUT> {
+public class FunctionalUnit<IN, OUT> {
 
     private static final Consumer NOP = in -> {};
 
@@ -29,14 +29,14 @@ public class FunctionalUnitSupport<IN, OUT> {
     /**
      * Erzeugt eine Functional-Unit, die beim Eintreffen eines Eingangswertes keine Operation ausführt.
      */
-    public FunctionalUnitSupport() {
+    public FunctionalUnit() {
         this(NOP);
     }
 
     /**
      * Erzeugt eine Functional-Unit, die beim Eintreffen eines Eingangswertes die angegebene Operation ausführt.
      */
-    public FunctionalUnitSupport(Consumer<IN> process) {
+    public FunctionalUnit(Consumer<IN> process) {
         Objects.requireNonNull(process, "process");
         this.process = process;
     }

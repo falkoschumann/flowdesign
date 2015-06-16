@@ -12,13 +12,13 @@ import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
 
-public class FunctionalUnitSupportTest {
+public class FunctionalUnitTest {
 
     private int result;
 
     @Test
     public void testInputPin() {
-        FunctionalUnitSupport<String, Integer> parser = new FunctionalUnitSupport<>(this::parse);
+        FunctionalUnit<String, Integer> parser = new FunctionalUnit<>(this::parse);
         parser.process("42");
         assertEquals(42, result);
     }
@@ -29,7 +29,7 @@ public class FunctionalUnitSupportTest {
 
     @Test
     public void testOutputPin() {
-        FunctionalUnitSupport<String, Integer> parser = new FunctionalUnitSupport<>();
+        FunctionalUnit<String, Integer> parser = new FunctionalUnit<>();
         parser.connectOutput(this::setResult);
 
         parser.publishResult(42);
@@ -42,7 +42,7 @@ public class FunctionalUnitSupportTest {
 
     @Test
     public void testDisconnect() {
-        FunctionalUnitSupport<String, Integer> parser = new FunctionalUnitSupport<>();
+        FunctionalUnit<String, Integer> parser = new FunctionalUnit<>();
         Consumer<Integer> consumer = this::setResult;
 
         parser.connectOutput(consumer);

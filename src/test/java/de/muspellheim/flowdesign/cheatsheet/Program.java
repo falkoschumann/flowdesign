@@ -3,7 +3,7 @@ package de.muspellheim.flowdesign.cheatsheet;
 import de.muspellheim.flowdesign.Configurable;
 import de.muspellheim.flowdesign.DependsOn;
 import de.muspellheim.flowdesign.EntryPoint;
-import de.muspellheim.flowdesign.FunctionalUnitSupport;
+import de.muspellheim.flowdesign.FunctionalUnit;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -60,7 +60,7 @@ public class Program {
 
     }
 
-    private static class A<T, S> extends FunctionalUnitSupport<T, S> implements Configurable<String[]> {
+    private static class A<T, S> extends FunctionalUnit<T, S> implements Configurable<String[]> {
 
         @Override
         public void process(T input) {
@@ -74,7 +74,7 @@ public class Program {
 
     }
 
-    private static class B<S, U> extends FunctionalUnitSupport<S, U> implements DependsOn<R> {
+    private static class B<S, U> extends FunctionalUnit<S, U> implements DependsOn<R> {
 
         @Override
         public void process(S input) {
@@ -88,7 +88,7 @@ public class Program {
 
     }
 
-    private static class X<T, U> extends FunctionalUnitSupport<T, U> {
+    private static class X<T, U> extends FunctionalUnit<T, U> {
 
         private List<Consumer<U>> consumers = new CopyOnWriteArrayList<>();
 

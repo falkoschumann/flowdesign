@@ -129,7 +129,7 @@ public class CheatSheet {
      * @param <T> Typ des Inputs.
      * @param <U> Typ des Outputs.
      */
-    public static class A<T, U> extends FunctionalUnitSupport<T, U> implements EntryPoint, Configurable<String[]> {
+    public static class A<T, U> extends FunctionalUnit<T, U> implements EntryPoint, Configurable<String[]> {
 
         @Override
         public void process(T input) {
@@ -154,7 +154,7 @@ public class CheatSheet {
      * @param <T> Typ des Inputs.
      * @param <U> Typ des Outputs.
      */
-    public static class X<T, U> extends FunctionalUnitSupport<T, U> {
+    public static class X<T, U> extends FunctionalUnit<T, U> {
 
         private Consumer<T> process;
 
@@ -170,7 +170,7 @@ public class CheatSheet {
 
     }
 
-    public static class B<S, U> extends FunctionalUnitSupport<S, U> {
+    public static class B<S, U> extends FunctionalUnit<S, U> {
 
         public void process(S input) {
             // ...
@@ -178,7 +178,7 @@ public class CheatSheet {
 
     }
 
-    public static class C<T, U, S> extends FunctionalUnitSupport<T, U> implements DependsOn<S> {
+    public static class C<T, U, S> extends FunctionalUnit<T, U> implements DependsOn<S> {
 
         private S s;
 
@@ -198,8 +198,8 @@ public class CheatSheet {
      */
     public static class File<T, S, U, V> {
 
-        private final FunctionalUnitSupport<?, U> errors = new FunctionalUnitSupport<>();
-        private final FunctionalUnitSupport<?, V> dataLoaded = new FunctionalUnitSupport<>();
+        private final FunctionalUnit<?, U> errors = new FunctionalUnit<>();
+        private final FunctionalUnit<?, V> dataLoaded = new FunctionalUnit<>();
 
         public void load(T input) {
             // ...
@@ -235,7 +235,7 @@ public class CheatSheet {
 
     }
 
-    public static class SplitLineIntoWords extends FunctionalUnitSupport<String, String> {
+    public static class SplitLineIntoWords extends FunctionalUnit<String, String> {
 
         public void process(String line) {
             for (String word : line.split(" "))
@@ -244,7 +244,7 @@ public class CheatSheet {
 
     }
 
-    public static class SplitLineIntoWordsVariant extends FunctionalUnitSupport<String, Iterable<String>> {
+    public static class SplitLineIntoWordsVariant extends FunctionalUnit<String, Iterable<String>> {
 
         public void process(String line) {
             publishResult(Arrays.asList(line.split(" ")));
