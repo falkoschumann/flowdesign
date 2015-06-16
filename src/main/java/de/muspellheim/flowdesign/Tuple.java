@@ -20,7 +20,7 @@ public class Tuple<F, S> {
     private final F first;
     private final S second;
 
-    protected Tuple(F first, S second) {
+    private Tuple(F first, S second) {
         this.first = first;
         this.second = second;
     }
