@@ -9,6 +9,7 @@ package de.muspellheim.flowdesign;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
@@ -95,6 +96,29 @@ public class FunctionalUnitSupportTest {
 
         public void disconnectNumberPinFrom(Consumer<Integer> inputPin) {
             delegate.disconnectOutputPinFrom(Integer.class, inputPin);
+        }
+
+    }
+
+    /**
+     * Wird nicht zum Ausführen von Tests benötigt. Validiert, ob die API vom Java-Compiler akzeptiert wird. Wegen der
+     * Typlöschung zur Laufzeit lässt sich folgendes nicht Kompilieren, wenn die Generics in der Schnittstelle von
+     * {@link FunctionalUnitSupport} nicht korrekt angegeben sind.
+     */
+    public static final class GenericsSyntaxTest {
+
+        private final FunctionalUnitSupport delegate = new FunctionalUnitSupport();
+
+        public void connectListPinWith(Consumer<List<String>> inputPin) {
+            delegate.connectOutputPinWith(List.class, inputPin);
+        }
+
+        public void disconnectListPinFrom(Consumer<List<String>> inputPin) {
+            delegate.disconnectOutputPinFrom(List.class, inputPin);
+        }
+
+        public void publishList(List<String> result) {
+            delegate.publishResultFor(List.class, result);
         }
 
     }
