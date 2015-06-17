@@ -1,12 +1,12 @@
 Flow-Design for Java [![Build Status](https://travis-ci.org/falkoschumann/flowdesign.svg?branch=develop)](https://travis-ci.org/falkoschumann/flowdesign)
 ====================
 
-Java-Implementierung der Flow-Design-API aus dem folgenden beiden Blogeinträgen:
+Java implementation of the Flow Design API from the blog entries:
 
   - [Flow-Design Cheat Sheet – Part I, Notation][1]
   - [Flow-Design Cheat Sheet – Part II, Translation][2]
 
-Mit einer Beispielimplementierung der Code-Kata *Bowling* aus dem Blogeintrag:
+With a example of Code Kata *Bowling* from blog entry:
 
   - [Flowing Bowling Game Kata I][3]
 
