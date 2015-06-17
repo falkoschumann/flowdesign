@@ -1,0 +1,25 @@
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+    <properties>
+        <title>Flow-Design for Java</title>
+        <author email="falko.schumann@muspellheim.de">Falko Schumann</author>
+    </properties>
+    <body>
+
+        <release version="1.0.1" date="2015-06-17" description="Improve generics">
+            <action dev="falkoschumann" type="update">
+    Improve using generics in FunctionalUnitSupport. Now methods accept
+    collections as wire type also.
+            </action>
+        </release>
+
+        <release version="1.0.0" date="2015-06-16" description="First release">
+            <action dev="falkoschumann" type="add">
+    Contains Flow Design API and helper class for implementing functional
+    units.
+            </action>
+        </release>
+
+    </body>
+</document>

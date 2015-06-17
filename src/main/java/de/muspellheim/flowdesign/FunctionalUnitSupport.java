@@ -29,7 +29,7 @@ public class FunctionalUnitSupport {
      * Verbindet den Outputpin des angegebenen Typs dieser Functional-Unit mit dem Inputpin einer anderen
      * Functional-Unit.
      */
-    public <T> void connectOutputPinWith(Class<T> outputType, Consumer<T> inputPin) {
+    public <T> void connectOutputPinWith(Class<? extends T> outputType, Consumer<? extends T> inputPin) {
         Objects.requireNonNull(inputPin);
         synchronized (this) {
             if (!consumers.containsKey(outputType))
@@ -42,7 +42,7 @@ public class FunctionalUnitSupport {
      * Trennt die Verbindung des Outputpins des angegebenen Typs dieser Functional-Unit mit dem Inputpin einer anderen
      * Functional-Unit.
      */
-    public <T> void disconnectOutputPinFrom(Class<T> outputType, Consumer<T> inputPin) {
+    public <T> void disconnectOutputPinFrom(Class<? extends T> outputType, Consumer<? extends T> inputPin) {
         Objects.requireNonNull(inputPin);
         synchronized (this) {
             if (consumers.containsKey(outputType))
@@ -53,7 +53,7 @@ public class FunctionalUnitSupport {
     /**
      * Veröffentlicht ein Ergebnis am Outputpin mit dem angegebenen Typ dieser Functional-Unit.
      */
-    public <T> void publishResultFor(Class<T> outputType, T result) {
+    public <T> void publishResultFor(Class<? extends T> outputType, T result) {
         synchronized (this) {
             if (consumers.containsKey(outputType))
                 consumers.get(outputType).forEach(c -> c.accept(result));
