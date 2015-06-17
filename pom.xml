@@ -78,6 +78,9 @@
                         <descriptorRef>bin</descriptorRef>
                         <descriptorRef>src</descriptorRef>
                     </descriptorRefs>
+                    <formats>
+                        <format>zip</format>
+                    </formats>
                 </configuration>
                 <executions>
                     <execution>
