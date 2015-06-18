@@ -7,6 +7,11 @@ import de.muspellheim.flowdesign.FunctionalUnit;
 import javax.inject.Inject;
 import java.util.function.Consumer;
 
+/**
+ * Implementation for the example program flow.
+ *
+ * <p><img src="doc-files/programm.png" alt="Flow Design of Program"><br>Flow Design of Program</p>
+ */
 public class Program {
 
     public static <T, S, U> void main(String[] args) {
