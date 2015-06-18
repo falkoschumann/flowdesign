@@ -2,6 +2,7 @@ package de.muspellheim.flowdesign.cheatsheet;
 
 import de.muspellheim.flowdesign.*;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -180,7 +181,7 @@ public class CheatSheet {
 
     }
 
-    public static class C<T, U, S> extends FunctionalUnit<T, U> implements DependsOn<S> {
+    public static class C<T, U, S> extends FunctionalUnit<T, U> {
 
         private S s;
 
@@ -188,7 +189,7 @@ public class CheatSheet {
             // ...
         }
 
-        @Override
+        @Inject
         public void inject(S object) {
             s = object;
         }

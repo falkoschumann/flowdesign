@@ -1,10 +1,10 @@
 package de.muspellheim.flowdesign.cheatsheet;
 
 import de.muspellheim.flowdesign.Configurable;
-import de.muspellheim.flowdesign.DependsOn;
 import de.muspellheim.flowdesign.EntryPoint;
 import de.muspellheim.flowdesign.FunctionalUnit;
 
+import javax.inject.Inject;
 import java.util.function.Consumer;
 
 public class Program {
@@ -72,14 +72,14 @@ public class Program {
 
     }
 
-    private static class B<S, U> extends FunctionalUnit<S, U> implements DependsOn<R> {
+    private static class B<S, U> extends FunctionalUnit<S, U> {
 
         @Override
         public void process(S input) {
             // ...
         }
 
-        @Override
+        @Inject
         public void inject(R object) {
             // ...
         }
