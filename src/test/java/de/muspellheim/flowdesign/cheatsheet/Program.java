@@ -1,12 +1,17 @@
 package de.muspellheim.flowdesign.cheatsheet;
 
-import de.muspellheim.flowdesign.Configurable;
-import de.muspellheim.flowdesign.DependsOn;
+import de.muspellheim.flowdesign.Configure;
 import de.muspellheim.flowdesign.EntryPoint;
 import de.muspellheim.flowdesign.FunctionalUnit;
 
+import javax.inject.Inject;
 import java.util.function.Consumer;
 
+/**
+ * Implementation for the example program flow.
+ *
+ * <p><img src="doc-files/programm.png" alt="Flow Design of Program"><br>Flow Design of Program</p>
+ */
 public class Program {
 
     public static <T, S, U> void main(String[] args) {
@@ -18,8 +23,8 @@ public class Program {
         X<T, U> x = new X<>(a, b);
 
         // (2) Bind
-        gui.connectQueryPinWith(x::process);
-        x.connectOutputPinWith(gui::display);
+        gui.connectWithQuery(x::process);
+        x.connectWithResult(gui::display);
 
         // (3) Inject
         b.inject(r);
@@ -44,12 +49,12 @@ public class Program {
             // ...
         }
 
-        public void connectQueryPinWith(Consumer<T> inputPin) {
-            delegate.connectOutputPinWith(inputPin);
+        public void connectWithQuery(Consumer<T> inputPin) {
+            delegate.connectWithResult(inputPin);
         }
 
-        public void disconnectQueryPinFrom(Consumer<T> inputPin) {
-            delegate.disconnectOutputPinFrom(inputPin);
+        public void disconnectFromQuery(Consumer<T> inputPin) {
+            delegate.disconnectFromResult(inputPin);
         }
 
     }
@@ -58,28 +63,28 @@ public class Program {
 
     }
 
-    private static class A<T, S> extends FunctionalUnit<T, S> implements Configurable<String[]> {
+    private static class A<T, S> extends FunctionalUnit<T, S> {
 
         @Override
         public void process(T input) {
             // ...
         }
 
-        @Override
+        @Configure
         public void configure(String[] args) {
             // ...
         }
 
     }
 
-    private static class B<S, U> extends FunctionalUnit<S, U> implements DependsOn<R> {
+    private static class B<S, U> extends FunctionalUnit<S, U> {
 
         @Override
         public void process(S input) {
             // ...
         }
 
-        @Override
+        @Inject
         public void inject(R object) {
             // ...
         }
@@ -92,8 +97,8 @@ public class Program {
 
         public <S> X(A<T, S> a, B<S, U> b) {
             process = a::process;
-            a.connectOutputPinWith(b::process);
-            b.connectOutputPinWith(this::publishResult);
+            a.connectWithResult(b::process);
+            b.connectWithResult(this::publishResult);
         }
 
         public void process(T input) {

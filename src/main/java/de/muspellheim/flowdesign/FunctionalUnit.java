@@ -52,7 +52,7 @@ public class FunctionalUnit<IN, OUT> {
     /**
      * Verbindet den Outputpin dieser Functional-Unit mit dem Inputpin einer anderen Functional-Unit.
      */
-    public void connectOutputPinWith(Consumer<OUT> inputPin) {
+    public void connectWithResult(Consumer<OUT> inputPin) {
         Objects.requireNonNull(inputPin);
         consumers.add(inputPin);
     }
@@ -60,7 +60,7 @@ public class FunctionalUnit<IN, OUT> {
     /**
      * Trennt die Verbindung des Outputpins dieser Functional-Unit mit dem Inputpin einer anderen Functional-Unit.
      */
-    public void disconnectOutputPinFrom(Consumer<OUT> inputPin) {
+    public void disconnectFromResult(Consumer<OUT> inputPin) {
         Objects.requireNonNull(inputPin);
         consumers.remove(inputPin);
     }
