@@ -47,11 +47,11 @@ public class Join<IN1, IN2> {
     }
 
     public void connectOutputPinWith(Consumer<Tuple<IN1, IN2>> inputPin) {
-        consumers.connectOutputPinWith(inputPin);
+        consumers.connectWithResult(inputPin);
     }
 
     public void disconnectOutputPinFrom(Consumer<Tuple<IN1, IN2>> inputPin) {
-        consumers.disconnectOutputPinFrom(inputPin);
+        consumers.disconnectFromResult(inputPin);
     }
 
 }

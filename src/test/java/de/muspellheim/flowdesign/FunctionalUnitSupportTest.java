@@ -36,8 +36,8 @@ public class FunctionalUnitSupportTest {
 
     @Test
     public void testOutputPins() {
-        fu.connectTextPinWith(this::processText);
-        fu.connectNumberPinWith(this::processNumber);
+        fu.connectWithText(this::processText);
+        fu.connectWithNumber(this::processNumber);
 
         fu.processText("Foo");
         assertEquals(textResult, "Foo");
@@ -53,8 +53,8 @@ public class FunctionalUnitSupportTest {
     @Test
     public void testDisconnect() {
         Consumer<Integer> consumer = this::processNumber;
-        fu.connectTextPinWith(this::processText);
-        fu.connectNumberPinWith(consumer);
+        fu.connectWithText(this::processText);
+        fu.connectWithNumber(consumer);
 
         fu.processText("Foo");
         assertEquals(textResult, "Foo");
@@ -62,7 +62,7 @@ public class FunctionalUnitSupportTest {
         fu.processNumber(42);
         assertEquals(42, numberResult);
 
-        fu.disconnectNumberPinFrom(consumer);
+        fu.disconnectFromNumber(consumer);
         fu.processNumber(13);
         assertEquals(42, numberResult);
         fu.processText("Bar");
@@ -78,24 +78,24 @@ public class FunctionalUnitSupportTest {
             delegate.publishResultFor(String.class, text);
         }
 
-        public void connectTextPinWith(Consumer<String> inputPin) {
-            delegate.connectOutputPinWith(String.class, inputPin);
+        public void connectWithText(Consumer<String> inputPin) {
+            delegate.connectWithResultFor(String.class, inputPin);
         }
 
-        public void disconnectTextPinFrom(Consumer<String> inputPin) {
-            delegate.disconnectOutputPinFrom(String.class, inputPin);
+        public void disconnectFromText(Consumer<String> inputPin) {
+            delegate.disconnectFromResultFor(String.class, inputPin);
         }
 
         public void processNumber(Integer number) {
             delegate.publishResultFor(Integer.class, number);
         }
 
-        public void connectNumberPinWith(Consumer<Integer> inputPin) {
-            delegate.connectOutputPinWith(Integer.class, inputPin);
+        public void connectWithNumber(Consumer<Integer> inputPin) {
+            delegate.connectWithResultFor(Integer.class, inputPin);
         }
 
-        public void disconnectNumberPinFrom(Consumer<Integer> inputPin) {
-            delegate.disconnectOutputPinFrom(Integer.class, inputPin);
+        public void disconnectFromNumber(Consumer<Integer> inputPin) {
+            delegate.disconnectFromResultFor(Integer.class, inputPin);
         }
 
     }
@@ -109,12 +109,12 @@ public class FunctionalUnitSupportTest {
 
         private final FunctionalUnitSupport delegate = new FunctionalUnitSupport();
 
-        public void connectListPinWith(Consumer<List<String>> inputPin) {
-            delegate.connectOutputPinWith(List.class, inputPin);
+        public void connectWithList(Consumer<List<String>> inputPin) {
+            delegate.connectWithResultFor(List.class, inputPin);
         }
 
-        public void disconnectListPinFrom(Consumer<List<String>> inputPin) {
-            delegate.disconnectOutputPinFrom(List.class, inputPin);
+        public void disconnectFromList(Consumer<List<String>> inputPin) {
+            delegate.disconnectFromResultFor(List.class, inputPin);
         }
 
         public void publishList(List<String> result) {

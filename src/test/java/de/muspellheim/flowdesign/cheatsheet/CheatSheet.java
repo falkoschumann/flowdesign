@@ -102,7 +102,7 @@ public class CheatSheet {
     public void wiring() {
         A a = new A();
         B b = new B();
-        a.connectOutputPinWith(b::process);
+        a.connectWithResult(b::process);
     }
 
     public void wiringSplit() {
@@ -110,8 +110,8 @@ public class CheatSheet {
         B b = new B();
         C c = new C();
 
-        a.connectOutputPinWith(b::process);
-        a.connectOutputPinWith(c::process);
+        a.connectWithResult(b::process);
+        a.connectWithResult(c::process);
     }
 
     public <T, U> void wiringJoin() {
@@ -120,8 +120,8 @@ public class CheatSheet {
         B<Void, U> b = new B();
         C<Tuple<T, U>, Void, Void> c = new C();
 
-        a.connectOutputPinWith(j::processInput1);
-        b.connectOutputPinWith(j::processInput2);
+        a.connectWithResult(j::processInput1);
+        b.connectWithResult(j::processInput2);
 
         j.connectOutputPinWith(c::process);
     }
@@ -163,8 +163,8 @@ public class CheatSheet {
 
         public <S> X(A<T, S> a, B<S, U> b) {
             process = a::process;
-            a.connectOutputPinWith(b::process);
-            b.connectOutputPinWith(this::publishResult);
+            a.connectWithResult(b::process);
+            b.connectWithResult(this::publishResult);
         }
 
         public void process(T input) {
@@ -213,11 +213,11 @@ public class CheatSheet {
         }
 
         public void connectError(Consumer<U> c) {
-            errors.connectOutputPinWith(c);
+            errors.connectWithResult(c);
         }
 
         public void disconnectError(Consumer<U> c) {
-            errors.disconnectOutputPinFrom(c);
+            errors.disconnectFromResult(c);
         }
 
         private void publishError(U u) {
@@ -225,11 +225,11 @@ public class CheatSheet {
         }
 
         public void connectDataLoaded(Consumer<V> c) {
-            dataLoaded.connectOutputPinWith(c);
+            dataLoaded.connectWithResult(c);
         }
 
         public void disconnectDataLoaded(Consumer<V> c) {
-            dataLoaded.disconnectOutputPinFrom(c);
+            dataLoaded.disconnectFromResult(c);
         }
 
         private void publishDataLoaded(V v) {

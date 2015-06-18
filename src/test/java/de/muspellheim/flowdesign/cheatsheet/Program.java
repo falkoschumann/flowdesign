@@ -18,8 +18,8 @@ public class Program {
         X<T, U> x = new X<>(a, b);
 
         // (2) Bind
-        gui.connectQueryPinWith(x::process);
-        x.connectOutputPinWith(gui::display);
+        gui.connectWithQuery(x::process);
+        x.connectWithResult(gui::display);
 
         // (3) Inject
         b.inject(r);
@@ -44,12 +44,12 @@ public class Program {
             // ...
         }
 
-        public void connectQueryPinWith(Consumer<T> inputPin) {
-            delegate.connectOutputPinWith(inputPin);
+        public void connectWithQuery(Consumer<T> inputPin) {
+            delegate.connectWithResult(inputPin);
         }
 
-        public void disconnectQueryPinFrom(Consumer<T> inputPin) {
-            delegate.disconnectOutputPinFrom(inputPin);
+        public void disconnectFromQuery(Consumer<T> inputPin) {
+            delegate.disconnectFromResult(inputPin);
         }
 
     }
@@ -92,8 +92,8 @@ public class Program {
 
         public <S> X(A<T, S> a, B<S, U> b) {
             process = a::process;
-            a.connectOutputPinWith(b::process);
-            b.connectOutputPinWith(this::publishResult);
+            a.connectWithResult(b::process);
+            b.connectWithResult(this::publishResult);
         }
 
         public void process(T input) {
