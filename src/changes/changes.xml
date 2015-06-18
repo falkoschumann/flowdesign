@@ -7,17 +7,30 @@
     </properties>
     <body>
 
+        <release version="2.0.0" date="2015-06-17" description="Replace interfaces with annotations">
+            <action dev="falkoschumann" type="remove">
+                Interfaces DependsOn and Configurable removed.
+            </action>
+            <action dev="falkoschumann" type="add">
+                Replaced interface DependsOn with annotation @Inject.
+            </action>
+            <action dev="falkoschumann" type="add">
+                Replaced interface Configurable with annotation @Configure.
+            </action>
+            <action dev="falkoschumann" type="update">
+                Naming connect and disconnect methods of functional units more clean.
+            </action>
+        </release>
+
         <release version="1.0.1" date="2015-06-17" description="Improve generics">
             <action dev="falkoschumann" type="update">
-    Improve using generics in FunctionalUnitSupport. Now methods accept
-    collections as wire type also.
+                Improve using generics in FunctionalUnitSupport. Now methods accept collections as wire type also.
             </action>
         </release>
 
         <release version="1.0.0" date="2015-06-16" description="First release">
             <action dev="falkoschumann" type="add">
-    Contains Flow Design API and helper class for implementing functional
-    units.
+                Contains Flow Design API and helper class for implementing functional units.
             </action>
         </release>
 
