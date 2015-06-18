@@ -1,6 +1,6 @@
 package de.muspellheim.flowdesign.cheatsheet;
 
-import de.muspellheim.flowdesign.Configurable;
+import de.muspellheim.flowdesign.Configure;
 import de.muspellheim.flowdesign.EntryPoint;
 import de.muspellheim.flowdesign.FunctionalUnit;
 
@@ -58,14 +58,14 @@ public class Program {
 
     }
 
-    private static class A<T, S> extends FunctionalUnit<T, S> implements Configurable<String[]> {
+    private static class A<T, S> extends FunctionalUnit<T, S> {
 
         @Override
         public void process(T input) {
             // ...
         }
 
-        @Override
+        @Configure
         public void configure(String[] args) {
             // ...
         }

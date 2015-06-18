@@ -132,7 +132,7 @@ public class CheatSheet {
      * @param <T> Typ des Inputs.
      * @param <U> Typ des Outputs.
      */
-    public static class A<T, U> extends FunctionalUnit<T, U> implements EntryPoint, Configurable<String[]> {
+    public static class A<T, U> extends FunctionalUnit<T, U> implements EntryPoint {
 
         @Override
         public void process(T input) {
@@ -144,7 +144,7 @@ public class CheatSheet {
             // ....
         }
 
-        @Override
+        @Configure
         public void configure(String[] args) {
             // ...
         }
