@@ -17,6 +17,6 @@ public interface DependsOn<T> {
     /**
      * Injiziert die Abhängigkeit in die Functional-Unit.
      */
-    void inject(T object);
+    void inject(T dependency);
 
 }
