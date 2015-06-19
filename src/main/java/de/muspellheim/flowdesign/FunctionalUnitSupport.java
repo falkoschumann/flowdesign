@@ -23,7 +23,7 @@ import java.util.function.Consumer;
  */
 public class FunctionalUnitSupport {
 
-    private final Map<Class<?>, List<Consumer<?>> consumers = new LinkedHashMap<>();
+    private final Map<Class<?>, List<Consumer> wires = new LinkedHashMap<>();
 
     /**
      * Verbindet den Outputpin des angegebenen Typs dieser Functional-Unit mit dem Inputpin einer anderen
@@ -32,9 +32,9 @@ public class FunctionalUnitSupport {
     public <T> void connectWithResultFor(Class<? extends T> outputType, Consumer<? extends T> inputPin) {
         Objects.requireNonNull(inputPin);
         synchronized (this) {
-            if (!consumers.containsKey(outputType))
-                consumers.put(outputType, new CopyOnWriteArrayList<>());
-            consumers.get(outputType).add(inputPin);
+            if (!wires.containsKey(outputType))
+                wires.put(outputType, new CopyOnWriteArrayList<>());
+            wires.get(outputType).add(inputPin);
         }
     }
 
@@ -45,8 +45,8 @@ public class FunctionalUnitSupport {
     public <T> void disconnectFromResultFor(Class<? extends T> outputType, Consumer<? extends T> inputPin) {
         Objects.requireNonNull(inputPin);
         synchronized (this) {
-            if (consumers.containsKey(outputType))
-                consumers.get(outputType).remove(inputPin);
+            if (wires.containsKey(outputType))
+                wires.get(outputType).remove(inputPin);
         }
     }
 
@@ -55,8 +55,8 @@ public class FunctionalUnitSupport {
      */
     public <T> void publishResultFor(Class<? extends T> outputType, T result) {
         synchronized (this) {
-            if (consumers.containsKey(outputType))
-                consumers.get(outputType).forEach(c -> c.accept(result));
+            if (wires.containsKey(outputType))
+                wires.get(outputType).forEach(c -> c.accept(result));
         }
     }
 
