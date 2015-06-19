@@ -23,7 +23,7 @@ import java.util.function.Consumer;
  */
 public class FunctionalUnitSupport {
 
-    private final Map<Class<?>, List<Consumer> wires = new LinkedHashMap<>();
+    private final Map<Class<?>, List<Consumer>> wires = new LinkedHashMap<>();
 
     /**
      * Verbindet den Outputpin des angegebenen Typs dieser Functional-Unit mit dem Inputpin einer anderen
