@@ -23,7 +23,7 @@ public class FunctionalUnit<IN, OUT> {
 
     private static final Consumer NOP = in -> {};
 
-    private final List<Consumer<OUT>> consumers = new CopyOnWriteArrayList<>();
+    private final List<Consumer<OUT>> wires = new CopyOnWriteArrayList<>();
     private final Consumer<IN> process;
 
     /**
@@ -54,7 +54,7 @@ public class FunctionalUnit<IN, OUT> {
      */
     public void connectWithResult(Consumer<OUT> inputPin) {
         Objects.requireNonNull(inputPin);
-        consumers.add(inputPin);
+        wires.add(inputPin);
     }
 
     /**
@@ -62,14 +62,14 @@ public class FunctionalUnit<IN, OUT> {
      */
     public void disconnectFromResult(Consumer<OUT> inputPin) {
         Objects.requireNonNull(inputPin);
-        consumers.remove(inputPin);
+        wires.remove(inputPin);
     }
 
     /**
      * Veröffentlicht ein Ergebnis am Outputpin dieser Functional-Unit.
      */
     public void publishResult(OUT result) {
-        consumers.forEach(c -> c.accept(result));
+        wires.forEach(c -> c.accept(result));
     }
 
 }
