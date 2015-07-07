@@ -15,6 +15,9 @@ a flow design in Java:
 
   - `MethodsCheatSheet` shows how to translate functional units to methods.
   - `EventsCheatSheet` shows how to translate functional units to events.
+  
+The class `Program` under `src/test/java` show a complete example programm with
+flow design.
 
 
 [1]: http://geekswithblogs.net/theArchitectsNapkin/archive/2011/03/19/flow-design-cheat-sheet-ndash-part-i-notation.aspx
