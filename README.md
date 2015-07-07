@@ -10,6 +10,12 @@ With a example of Code Kata *Bowling* from blog entry:
 
   - [Flowing Bowling Game Kata I][3]
 
+The classes `...CheatSheet` under `src/test/java` show examples how to implement
+a flow design in Java:
+
+  - `MethodsCheatSheet` shows how to translate functional units to methods.
+  - `EventsCheatSheet` shows how to translate functional units to events.
+
 
 [1]: http://geekswithblogs.net/theArchitectsNapkin/archive/2011/03/19/flow-design-cheat-sheet-ndash-part-i-notation.aspx
 [2]: http://geekswithblogs.net/theArchitectsNapkin/archive/2011/03/20/flow-design-cheat-sheet-ndash-part-ii-translation.aspx
