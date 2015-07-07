@@ -4,36 +4,36 @@
  * Copyright (c) 2015 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
+
 package de.muspellheim.flowdesign;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 
 /**
- * Ein Tupel aus zwei Werten. Ein Tupel ist ein Wertobjekt (Value Object).
+ * Ein Tuple ist eine Struktur aus zwei Elementen.
  *
- * @param <F> der Typ des ersten Wertes.
- * @param <S> der Typ des zweiten Wertes.
- * @author Falko Schumann &lt;www.muspellheim.de&gt;
+ * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
  */
-public class Tuple<F, S> {
+public class Tuple<T, U> {
 
-    private final F first;
-    private final S second;
+    private final T first;
+    private final U second;
 
-    private Tuple(F first, S second) {
+    private Tuple(T first, U second) {
         this.first = first;
         this.second = second;
     }
 
-    public static <F, S> Tuple<F, S> of(F first, S second) {
-        return new Tuple<>(first, second);
+    public static <T, U> Tuple<T, U> of(T first, U second) {
+        return new Tuple(first, second);
     }
 
-    public F getFirst() {
+    public T getFirst() {
         return first;
     }
 
-    public S getSecond() {
+    public U getSecond() {
         return second;
     }
 
@@ -42,7 +42,8 @@ public class Tuple<F, S> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tuple<?, ?> tuple = (Tuple<?, ?>) o;
-        return Objects.equals(first, tuple.first) && Objects.equals(second, tuple.second);
+        return Objects.equals(first, tuple.first) &&
+                Objects.equals(second, tuple.second);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class Tuple<F, S> {
 
     @Override
     public String toString() {
-        return "(" + getFirst() + ", " + getSecond() + ")";
+        return MessageFormat.format("({0}, {1})", first, second);
     }
 
 }
