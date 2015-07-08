@@ -19,7 +19,7 @@ public class Program<T, S, U> {
     private R r;
     private A<T, S> a;
     private B<S, U> b;
-    private X<T, U> x;
+    private X<T, S, U> x;
 
     public Program(String[] args) {
         this.args = args;
@@ -110,11 +110,11 @@ public class Program<T, S, U> {
 
     }
 
-    private static class X<T, U> extends FunctionaUnit<T, U> {
+    private static class X<T, S, U> extends FunctionaUnit<T, U> {
 
         private final InputPin<T> process;
 
-        public X(A<T, ?> a, B<?, U> b) {
+        public X(A<T, S> a, B<S, U> b) {
             process = a::process;
             a.result().connect(b::process);
             b.result().connect(this.result()::publish);
