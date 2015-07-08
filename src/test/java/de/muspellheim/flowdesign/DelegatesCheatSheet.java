@@ -7,35 +7,35 @@
 
 package de.muspellheim.flowdesign;
 
+import java.util.function.Consumer;
+
 /**
- * Zeigt wie Functional-Units in Methoden überführt werden können.
+ * Zeigt wie Functional-Units in Methoden mit Delegate-Parameter anstelle Rückgabewerten überführt werden können.
  *
  * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
  */
-public class MethodsCheatSheet {
+public class DelegatesCheatSheet {
 
     /**
      * Ein einfaches Beispiel einer Functional-Unit mit einem Input T und einem Output U.
      */
-    public <U, T> U a(T input) {
+    public <U, T> void a(T input, Consumer<U> output) {
         U u = null;
         // ...
-        return u;
+        output.accept(u);
     }
 
     /**
      * Ein zusammengesetzten Beispiel. Die beiden Parts A und B werden zum Board X zusammengesteckt.
      */
-    public <U, S, T> U x(T input) {
-        S s = a(input);
-        U u = b(s);
-        return u;
+    public <U, S, T> void x(T input, Consumer<U> output) {
+        a(input, s -> b(s, output::accept));
     }
 
-    private <U, T> U b(T input) {
+    private <U, T> void b(T input, Consumer<U> output) {
         U u = null;
         // ...
-        return u;
+        output.accept(u);
     }
 
 
@@ -49,16 +49,16 @@ public class MethodsCheatSheet {
     /**
      * Eine Functional-Unit mit zwei Output-Pins zu einem Tuple vereint.
      */
-    public <T, U> Tuple<T, U> a() {
+    public <T, U> void a(Consumer<Tuple<T, U>> output) {
         Tuple<T, U> t = null;
         // ...
-        return t;
+        output.accept(t);
     }
 
     /**
      * Eine Functional-Unit mit zwei Output-Pins als Output-Parameter.
      */
-    public <T, U> void a(T outputT, U outputU) {
+    public <T, U> void a(Consumer<T> outputT, Consumer<U> outputU) {
         // ...
     }
 
@@ -68,18 +68,16 @@ public class MethodsCheatSheet {
     public <T, U, S, V> void foo() {
         T t = null;
         U u = null;
-        a(t, u);
 
-        S s = b(t);
-        V v = c(u);
-
-        d(Tuple.of(s, v));
+        // FIXME Functional-Unit mit zwei Input-Pins scheint schwieriger realisierbar
+        //a(t -> b(t, s), u -> c(u, v));
+        //d(Tuple.of(s, v));
     }
 
-    private <U, T> U c(T input) {
+    private <U, T> void c(T input, Consumer<U> output) {
         U u = null;
         // ...
-        return u;
+        output.accept(u);
     }
 
     private <U, T> void d(Tuple<T, U> input) {
