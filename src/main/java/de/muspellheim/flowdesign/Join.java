@@ -12,6 +12,8 @@ package de.muspellheim.flowdesign;
  * der Output veröffentlicht. Wenn zweimal hintereinader der zweite Input eintriff, dabei jeweils der gleiche erste
  * Input veröffentlicht.  Für die erste Veröffentlichung müssen einmalig beide Inputs eingetroffen sein.
  *
+ * @param <T> der Typ des ersten Input-Pins.
+ * @param <U> der Typ des zweiten Input-Pins.
  * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
  * @see AutoResetJoin
  */
@@ -26,14 +28,27 @@ public class Join<T, U> {
     private U input2;
     private boolean input2Present;
 
+    /**
+     * Erzeugt einen Join.
+     */
     public Join() {
         this(false);
     }
 
+    /**
+     * Initialisiert den Join.
+     *
+     * @param autoReset wenn das Flag gesetzt ist, wird die Präsenz aller Eingangsdaten zurückgesetzt.
+     */
     protected Join(boolean autoReset) {
         this.autoReset = autoReset;
     }
 
+    /**
+     * Der erste Input-Pin.
+     *
+     * @param input1 ein Eingangsdatum.
+     */
     public void input1(T input1) {
         this.input1 = input1;
         input1Present = true;
@@ -41,6 +56,11 @@ public class Join<T, U> {
             publishResult();
     }
 
+    /**
+     * Der zweite Input-Pin.
+     *
+     * @param input2 ein Eingangsdatum.
+     */
     public void input2(U input2) {
         this.input2 = input2;
         input2Present = true;
@@ -59,6 +79,11 @@ public class Join<T, U> {
         input2Present = false;
     }
 
+    /**
+     * Der Output-Pin.
+     *
+     * @return der Output-Pin.
+     */
     public OutputPin<Tuple<T, U>> output() {
         return output;
     }

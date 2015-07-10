@@ -14,6 +14,11 @@ package de.muspellheim.flowdesign;
  */
 public interface EntryPoint {
 
+    /**
+     * Startet den Fluss am Entry-Point.
+     *
+     * @param args die Kommandozeilenoptionen der Applikation.
+     */
     void run(String[] args);
 
 }
