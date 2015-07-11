@@ -2,10 +2,28 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
     <properties>
-        <title>Flow-Design for Java</title>
+        <title>Flow-Design für Java</title>
         <author email="falko.schumann@muspellheim.de">Falko Schumann</author>
     </properties>
     <body>
+
+        <release version="3.0.0" date="2015-07-11" description="Neustart des Flow-Frameworks">
+            <action dev="falkoschumann" type="add">
+                Input-Pins, Output-Pins einschließlich deren Verknüpfung (`InputPin` `OutputPin`).
+            </action>
+            <action dev="falkoschumann" type="add">
+                Basisklasse für eine Functional-Unit mit genau einem Input-Pin und Output-Pin (`FunctionalUnit`).
+            </action>
+            <action dev="falkoschumann" type="add">
+                Basisklasse für die Initialisierung das Starten eines Flows (`Flow`).
+            </action>
+            <action dev="falkoschumann" type="add">
+                Schnittstelle für die Phasen der Flow-Initalisierung (`DependsOn`, `Configurable`, `EntryPoint`).
+            </action>
+            <action dev="falkoschumann" type="add">
+                `Tuple`, `Map`, `Join`, `Split`.
+            </action>
+        </release>
 
         <release version="2.0.0" date="2015-06-17" description="Replace interfaces with annotations">
             <action dev="falkoschumann" type="remove">
