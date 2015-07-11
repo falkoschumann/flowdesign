@@ -4,18 +4,20 @@
  * Copyright (c) 2015 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
+
 package de.muspellheim.flowdesign;
 
 /**
- * Diese Schnittstelle sollte von einer Functional-Units implementiert werden, die der Startpunkt eines Flussdiagramms
- * darstellt.
+ * Diese Schnittstelle markiert eine Functional-Unit als Entry-Point und startet den Datenfluss.
  *
- * @author Falko Schumann &lt;www.muspellheim.de&gt;
+ * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
  */
 public interface EntryPoint {
 
     /**
-     * Initialisiert den Fluss mit den Argumenten der Applikation.
+     * Startet den Fluss am Entry-Point.
+     *
+     * @param args die Kommandozeilenoptionen der Applikation.
      */
     void run(String[] args);
 

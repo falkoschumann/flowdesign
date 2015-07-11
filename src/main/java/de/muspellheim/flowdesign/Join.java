@@ -4,54 +4,88 @@
  * Copyright (c) 2015 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
+
 package de.muspellheim.flowdesign;
 
-import java.util.function.Consumer;
-
 /**
- * Implementiert einen Join zweier Eingangswerte zu einen Tupel. Bei jeden eingetroffenen Eingangswert wird das Tupel
- * als Ergebnis veröffentlicht. Um das erste Tupel zu veröffentlichen, müssen einmalig beide Eingangswerte eingetroffen
- * sein.
+ * Verbindet zwei Inputs zu einem gemeinsamen Output als Tupel. Jedesmal, wenn einer der beiden Inputs eintrifft, wird
+ * der Output veröffentlicht. Wenn zweimal hintereinader der zweite Input eintriff, dabei jeweils der gleiche erste
+ * Input veröffentlicht.  Für die erste Veröffentlichung müssen einmalig beide Inputs eingetroffen sein.
  *
- * @param <IN1> der Typ des ersten Inputpins, üblicherweise eine Struktur.
- * @param <IN2> der Typ des zweiten Outputpins, üblicherweise eine Struktur.
- * @author Falko Schumann &lt;www.muspellheim.de&gt;
+ * @param <T> der Typ des ersten Input-Pins.
+ * @param <U> der Typ des zweiten Input-Pins.
+ * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @see AutoResetJoin
  */
-public class Join<IN1, IN2> {
+public class Join<T, U> {
 
-    private final FunctionalUnit<?, Tuple<IN1, IN2>> consumers = new FunctionalUnit<>();
+    private final OutputPin<Tuple<T, U>> output = new OutputPin<>();
 
-    private IN1 input1;
-    private IN2 input2;
+    private final boolean autoReset;
 
-    /**
-     * Nimmt den ersten Eingangswert entgegen und versucht ein Tupel zu veröffentlichen.
-     */
-    public void processInput1(IN1 input) {
-        input1 = input;
-        tryJoin();
-    }
+    private T input1;
+    private boolean input1Present;
+    private U input2;
+    private boolean input2Present;
 
     /**
-     * Nimmt den zweiten Eingangswert entgegen und versucht ein Tupel zu veröffentlichen.
+     * Erzeugt einen Join.
      */
-    public void processInput2(IN2 input) {
-        input2 = input;
-        tryJoin();
+    public Join() {
+        this(false);
     }
 
-    private synchronized void tryJoin() {
-        if (input1 != null && input2 != null) {
-            consumers.publishResult(Tuple.of(input1, input2));
-        }
+    /**
+     * Initialisiert den Join.
+     *
+     * @param autoReset wenn das Flag gesetzt ist, wird die Präsenz aller Eingangsdaten zurückgesetzt.
+     */
+    protected Join(boolean autoReset) {
+        this.autoReset = autoReset;
     }
 
-    public void connectOutputPinWith(Consumer<Tuple<IN1, IN2>> inputPin) {
-        consumers.connectWithResult(inputPin);
+    /**
+     * Der erste Input-Pin.
+     *
+     * @param input1 ein Eingangsdatum.
+     */
+    public void input1(T input1) {
+        this.input1 = input1;
+        input1Present = true;
+        if (input1Present && input2Present)
+            publishResult();
     }
 
-    public void disconnectOutputPinFrom(Consumer<Tuple<IN1, IN2>> inputPin) {
-        consumers.disconnectFromResult(inputPin);
+    /**
+     * Der zweite Input-Pin.
+     *
+     * @param input2 ein Eingangsdatum.
+     */
+    public void input2(U input2) {
+        this.input2 = input2;
+        input2Present = true;
+        if (input1Present && input2Present)
+            publishResult();
+    }
+
+    private void publishResult() {
+        output().publish(Tuple.of(input1, input2));
+        if (autoReset)
+            clearInputPresence();
+    }
+
+    private void clearInputPresence() {
+        input1Present = false;
+        input2Present = false;
+    }
+
+    /**
+     * Der Output-Pin.
+     *
+     * @return der Output-Pin.
+     */
+    public OutputPin<Tuple<T, U>> output() {
+        return output;
     }
 
 }

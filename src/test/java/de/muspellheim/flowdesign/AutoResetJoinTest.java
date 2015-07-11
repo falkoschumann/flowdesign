@@ -11,20 +11,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
- * Unit-Tests für Join.
+ * Unit-Tests für AutoResetJoin.
  *
  * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
  */
-public class JoinTest {
+public class AutoResetJoinTest {
 
-    private Join<Integer, Integer> join;
+    private AutoResetJoin<Integer, Integer> join;
     private Tuple<Integer, Integer> output;
 
     @Before
     public void setUp() {
-        join = new Join<>();
+        join = new AutoResetJoin<>();
         join.output().connect(this::setOutput);
     }
 
@@ -46,8 +47,13 @@ public class JoinTest {
         join.input2(2);
         assertEquals(Tuple.of(4, 2), output);
 
+
+        output = null;
         join.input2(3);
-        assertEquals(Tuple.of(4, 3), output);
+        assertNull(output);
+
+        join.input1(1);
+        assertEquals(Tuple.of(1, 3), output);
     }
 
     @Test
@@ -56,8 +62,12 @@ public class JoinTest {
         join.input2(2);
         assertEquals(Tuple.of(4, 2), output);
 
+        output = null;
         join.input1(3);
-        assertEquals(Tuple.of(3, 2), output);
+        assertNull(output);
+
+        join.input2(1);
+        assertEquals(Tuple.of(3, 1), output);
     }
 
 }
