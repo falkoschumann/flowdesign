@@ -14,7 +14,7 @@ package de.muspellheim.flowdesign;
  * @param <U> der Typ des Output-Pins.
  * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
  */
-public abstract class FunctionaUnit<T, U> {
+public abstract class BaseFunctionaUnit<T, U> {
 
     private final OutputPin<U> result = new OutputPin<>();
 

@@ -16,7 +16,7 @@ import java.util.function.Function;
  * @param <U> der Typ des Output-Pins.
  * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
  */
-public class Map<T, U> extends FunctionaUnit<T, U> {
+public class Map<T, U> extends BaseFunctionaUnit<T, U> {
 
     private final Function<T, U> converter;
 

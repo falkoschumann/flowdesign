@@ -82,7 +82,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class A<T, S> extends FunctionaUnit<T, S> implements Configurable {
+    private static class A<T, S> extends BaseFunctionaUnit<T, S> implements Configurable {
 
         @Override
         public void process(T input) {
@@ -96,7 +96,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class B<S, U> extends FunctionaUnit<S, U> implements DependsOn<R> {
+    private static class B<S, U> extends BaseFunctionaUnit<S, U> implements DependsOn<R> {
 
         @Override
         public void process(S input) {
@@ -110,7 +110,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class X<T, S, U> extends FunctionaUnit<T, U> {
+    private static class X<T, S, U> extends BaseFunctionaUnit<T, U> {
 
         private final InputPin<T> process;
 
