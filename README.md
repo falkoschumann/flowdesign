@@ -1,4 +1,4 @@
-Flow-Design for Java [![Build Status](https://travis-ci.org/falkoschumann/flowdesign.svg?branch=feature-java8)](https://travis-ci.org/falkoschumann/flowdesign)
+Flow-Design for Java [![Build Status](https://travis-ci.org/falkoschumann/flowdesign.svg?branch=develop)](https://travis-ci.org/falkoschumann/flowdesign)
 ====================
 
 Dieses Projekt enthält eine Java-Implementation der Flow-API die in den
