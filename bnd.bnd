@@ -1,0 +1,4 @@
+-exportcontents: de.muspellheim.flowdesign.*
+-sources: true
+
+Bundle-Name: Flow-Design

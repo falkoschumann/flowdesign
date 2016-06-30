@@ -103,9 +103,9 @@ public class EventsCheatSheet {
      * Eine Functional-Unit mit zwei Output-Pins zu einem Tuple vereint.
      */
     public <T, U> void join() {
-        A<?, T> a = null;
-        B<?, U> b = null;
-        C<Tuple<T, U>, ?> c = null;
+        A<?, T> a = new A<>();
+        B<?, U> b = new B<>();
+        C<Tuple<T, U>, ?> c = new C<>();
 
         Join<T, U> j = new Join<>();
 
