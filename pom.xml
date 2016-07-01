@@ -9,15 +9,9 @@
     <artifactId>flowdesign</artifactId>
     <version>3.1.0-SNAPSHOT</version>
 
-    <name>Flow-Design</name>
+    <name>Flow Design</name>
     <description>A Java implementation of Flow Design.</description>
     <url>https://github.com/falkoschumann/java-flowdesign</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-    </properties>
 
     <licenses>
         <license>
@@ -51,38 +45,10 @@
         <url>https://travis-ci.org/falkoschumann/java-flowdesign</url>
     </ciManagement>
 
-    <profiles>
-        <profile>
-            <id>bintray</id>
-            <repositories>
-                <repository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>bintray-falkoschumann-maven</id>
-                    <name>bintray</name>
-                    <url>http://dl.bintray.com/falkoschumann/maven</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>bintray-falkoschumann-maven</id>
-                    <name>bintray-plugins</name>
-                    <url>http://dl.bintray.com/falkoschumann/maven</url>
-                </pluginRepository>
-            </pluginRepositories>
-            <distributionManagement>
-                <repository>
-                    <id>bintray-falkoschumann-maven</id>
-                    <name>falkoschumann-maven</name>
-                    <url>https://api.bintray.com/maven/falkoschumann/maven/java-flowdesign/;publish=1</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-    </profiles>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -100,8 +66,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -193,11 +159,6 @@
                 <version>2.19.1</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <version>2.11</version>
-            </plugin>
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>3.0.3</version>
@@ -212,5 +173,38 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <profiles>
+        <profile>
+            <id>bintray</id>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-falkoschumann-maven</id>
+                    <name>bintray</name>
+                    <url>http://dl.bintray.com/falkoschumann/maven</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-falkoschumann-maven</id>
+                    <name>bintray-plugins</name>
+                    <url>http://dl.bintray.com/falkoschumann/maven</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <distributionManagement>
+                <repository>
+                    <id>bintray-falkoschumann-maven</id>
+                    <name>falkoschumann-maven</name>
+                    <url>https://api.bintray.com/maven/falkoschumann/maven/java-flowdesign/;publish=1</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 </project>

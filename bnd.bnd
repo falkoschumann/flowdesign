@@ -1,4 +1,5 @@
 -exportcontents: de.muspellheim.flowdesign.*
 -sources: true
 
-Bundle-Name: Flow-Design
+Bundle-Name: Flow Design
+Bundle-SymbolicName: de.muspellheim.flowdesign
