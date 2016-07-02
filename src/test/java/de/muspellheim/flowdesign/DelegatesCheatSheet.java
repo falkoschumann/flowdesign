@@ -1,7 +1,5 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
