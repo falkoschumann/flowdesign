@@ -10,7 +10,7 @@ import java.util.Iterator;
 /**
  * Zeigt wie Functional-Units mit Hilfe von Ereignissen zusammengesteckt werden können.
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
  */
 public class EventsCheatSheet {
 

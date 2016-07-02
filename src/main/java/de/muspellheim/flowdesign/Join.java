@@ -6,14 +6,20 @@
 package de.muspellheim.flowdesign;
 
 /**
- * Verbindet zwei Inputs zu einem gemeinsamen Output als Tupel. Jedesmal, wenn einer der beiden Inputs eintrifft, wird
- * der Output veröffentlicht. Wenn zweimal hintereinader der zweite Input eintriff, dabei jeweils der gleiche erste
- * Input veröffentlicht.  Für die erste Veröffentlichung müssen einmalig beide Inputs eingetroffen sein.
+ * Join two input data to one tuple.
+ * <p>
+ * Every time an input data is received a tuple of the two current objects is
+ * published. If an input element is received twice the published tuple holds
+ * the same other element. The first tuple is published if both input data are
+ * received.
+ * <p>
+ * This behaviour differs from {@link AutoResetJoin}.
  *
- * @param <T> der Typ des ersten Input-Pins.
- * @param <U> der Typ des zweiten Input-Pins.
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @param <T> the type of first input data.
+ * @param <U> the type of second input data.
+ * @author Falko Schumann
  * @see AutoResetJoin
+ * @since 3.0
  */
 public class Join<T, U> {
 
@@ -27,25 +33,20 @@ public class Join<T, U> {
     private boolean input2Present;
 
     /**
-     * Erzeugt einen Join.
+     * Creates a join.
      */
     public Join() {
         this(false);
     }
 
-    /**
-     * Initialisiert den Join.
-     *
-     * @param autoReset wenn das Flag gesetzt ist, wird die Präsenz aller Eingangsdaten zurückgesetzt.
-     */
-    protected Join(boolean autoReset) {
+    Join(boolean autoReset) {
         this.autoReset = autoReset;
     }
 
     /**
-     * Der erste Input-Pin.
+     * The first input pin.
      *
-     * @param input1 ein Eingangsdatum.
+     * @param input1 a input data for the first input pin.
      */
     public void input1(T input1) {
         this.input1 = input1;
@@ -55,9 +56,9 @@ public class Join<T, U> {
     }
 
     /**
-     * Der zweite Input-Pin.
+     * The Second input pin.
      *
-     * @param input2 ein Eingangsdatum.
+     * @param input2 a input data for the second input pin.
      */
     public void input2(U input2) {
         this.input2 = input2;
@@ -78,9 +79,9 @@ public class Join<T, U> {
     }
 
     /**
-     * Der Output-Pin.
+     * The output pin publishes data from the two input pins as tuple.
      *
-     * @return der Output-Pin.
+     * @return the output pin.
      */
     public OutputPin<Tuple<T, U>> output() {
         return output;

@@ -6,9 +6,10 @@
 package de.muspellheim.flowdesign;
 
 /**
- * Dieses Interface markiert eine Functional-Unit.
+ * Marks a class as functional unit (FU).
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
+ * @since 3.0
  */
 public interface FunctionalUnit {
 

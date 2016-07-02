@@ -8,29 +8,34 @@ package de.muspellheim.flowdesign;
 import java.util.function.Function;
 
 /**
- * Konvertiert einen Wert in einen anderen.
+ * This functional unit does a type mapping.
+ * <p>
+ * The mapping can be set with an mapper function in constructor.
  *
- * @param <T> der Typ des Input-Pins.
- * @param <U> der Typ des Output-Pins.
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @param <T> the type of input data.
+ * @param <U> the type of output data.
+ * @author Falko Schumann
+ * @since 3.0
  */
-public class Map<T, U> extends BaseFunctionaUnit<T, U> {
+public class Map<T, U> extends BaseFunctionalUnit<T, U> {
 
     private final Function<T, U> converter;
 
     /**
-     * Initialisiert das Mapping.
+     * Configure this functional unit with a mapper function.
      *
-     * @param converter die Funktion, die die Konvertierung durchführt.
+     * @param converter a function to convert from input data type to output data type.
      */
     public Map(Function<T, U> converter) {
         this.converter = converter;
     }
 
     /**
-     * Nimmt einen Wert entgegen und veröffentlicht das konvertierte Datum.
+     * Convert input data to output data.
+     * <p>
+     * The output data is published on the output pin {@link #result()}.
      *
-     * @param input ein Eingangsdatum.
+     * @param input an input data.
      */
     @Override
     public void process(T input) {

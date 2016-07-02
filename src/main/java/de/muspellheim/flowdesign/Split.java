@@ -6,11 +6,12 @@
 package de.muspellheim.flowdesign;
 
 /**
- * Trennt einen Tupel-Input zu zwei Outputs.
+ * Split the elements of a tuple into two data objects.
  *
- * @param <T> der Typ des ersten Output-Pins.
- * @param <U> der Typ des zweiten Output-Pins.
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @param <T> the type of the first tuple element.
+ * @param <U> the type of the second tuple element.
+ * @author Falko Schumann
+ * @since 3.0
  */
 public class Split<T, U> {
 
@@ -18,9 +19,12 @@ public class Split<T, U> {
     private final OutputPin<U> output2 = new OutputPin<>();
 
     /**
-     * Der Input-Pin.
+     * The input pin receive a tuple.
+     * <p>
+     * If a tuple is received, first element is published on {@link #output1()}
+     * and second element is published on {@link #output2()}.
      *
-     * @param input ein Eingangsdatum.
+     * @param input a tuple.
      */
     public void input(Tuple<T, U> input) {
         output1().publish(input.getFirst());
@@ -28,18 +32,18 @@ public class Split<T, U> {
     }
 
     /**
-     * Der erste Output-Pin.
+     * This output pin published the first element of received tuple.
      *
-     * @return der erste Output-Pin.
+     * @return the first output pin.
      */
     public OutputPin<T> output1() {
         return output1;
     }
 
     /**
-     * Der zweite Output-Pin.
+     * This output pin published the second element of received tuple.
      *
-     * @return der zweite Output-Pin.
+     * @return the second output pin.
      */
     public OutputPin<U> output2() {
         return output2;

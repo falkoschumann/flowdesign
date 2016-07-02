@@ -6,16 +6,17 @@
 package de.muspellheim.flowdesign;
 
 /**
- * Diese Schnittstelle konfiguriert eine Functional-Unit.
+ * Marks a functional unit to be configured.
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
+ * @since 3.0
  */
 public interface Configurable {
 
     /**
-     * Als Konfiguration werden die Kommandozeilenoptionen der Applikation übergeben.
+     * Configure the functional unit with the applications command line arguments.
      *
-     * @param args die Kommandozeilenoptionen der Applikattion.
+     * @param args the command line arguments of the application.
      */
     void configure(String[] args);
 

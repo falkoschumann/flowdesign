@@ -8,14 +8,15 @@ package de.muspellheim.flowdesign;
 import java.util.function.Consumer;
 
 /**
- * Zeigt wie Functional-Units in Methoden mit Delegate-Parameter anstelle Rückgabewerten überführt werden können.
+ * Shows how to transfer a functional unit into methods with delegate parameter
+ * instead of using return values.
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
  */
 public class DelegatesCheatSheet {
 
     /**
-     * Ein einfaches Beispiel einer Functional-Unit mit einem Input T und einem Output U.
+     * A simple example of an functional unit with one input and one output.
      */
     public <U, T> void a(T input, Consumer<U> output) {
         U u = null;
@@ -24,7 +25,7 @@ public class DelegatesCheatSheet {
     }
 
     /**
-     * Ein zusammengesetzten Beispiel. Die beiden Parts A und B werden zum Board X zusammengesteckt.
+     * A composite example. The parts A and B are put together to board X.
      */
     public <U, S, T> void x(T input, Consumer<U> output) {
         a(input, s -> b(s, output::accept));
@@ -36,16 +37,15 @@ public class DelegatesCheatSheet {
         output.accept(u);
     }
 
-
     /**
-     * Eine Functional-Unit mit zwei Input-Pins zu einem Tuple vereint.
+     * A functional unit with two input pins joined to a tuple.
      */
     public <T, U> void a(Tuple<T, U> input) {
         // ...
     }
 
     /**
-     * Eine Functional-Unit mit zwei Output-Pins zu einem Tuple vereint.
+     * A functional unit with two output pins joined to a tuple.
      */
     public <T, U> void a(Consumer<Tuple<T, U>> output) {
         Tuple<T, U> t = null;
@@ -54,7 +54,7 @@ public class DelegatesCheatSheet {
     }
 
     /**
-     * Eine Functional-Unit mit zwei Output-Pins als Output-Parameter.
+     * A functional unit with two separate output pins.
      */
     public <T, U> void a(Consumer<T> outputT, Consumer<U> outputU) {
         // ...

@@ -6,16 +6,17 @@
 package de.muspellheim.flowdesign;
 
 /**
- * Diese Schnittstelle markiert eine Functional-Unit als Entry-Point und startet den Datenfluss.
+ * Marks a class as entry point for a flow application.
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
+ * @since 3.0
  */
 public interface EntryPoint {
 
     /**
-     * Startet den Fluss am Entry-Point.
+     * Starts the flow of an application.
      *
-     * @param args die Kommandozeilenoptionen der Applikation.
+     * @param args the command line arguments of the application.
      */
     void run(String[] args);
 

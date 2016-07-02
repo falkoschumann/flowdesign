@@ -8,7 +8,7 @@ package de.muspellheim.flowdesign;
 /**
  * Zeigt wie Functional-Units in Methoden überführt werden können.
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
  */
 public class MethodsCheatSheet {
 

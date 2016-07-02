@@ -8,7 +8,7 @@ package de.muspellheim.flowdesign;
 /**
  * Ein komplettes Beispielprogramm.
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
  */
 public class Program<T, S, U> {
 
@@ -80,7 +80,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class A<T, S> extends BaseFunctionaUnit<T, S> implements Configurable {
+    private static class A<T, S> extends BaseFunctionalUnit<T, S> implements Configurable {
 
         @Override
         public void process(T input) {
@@ -94,7 +94,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class B<S, U> extends BaseFunctionaUnit<S, U> implements DependsOn<R> {
+    private static class B<S, U> extends BaseFunctionalUnit<S, U> implements DependsOn<R> {
 
         @Override
         public void process(S input) {
@@ -108,7 +108,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class X<T, S, U> extends BaseFunctionaUnit<T, U> {
+    private static class X<T, S, U> extends BaseFunctionalUnit<T, U> {
 
         private final InputPin<T> process;
 

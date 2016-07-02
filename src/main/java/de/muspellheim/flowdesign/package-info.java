@@ -4,6 +4,6 @@
  */
 
 /**
- * API und Implementierung für Flow-Design mit Java.
+ * API and implementation of a flow design framework for Java.
  */
 package de.muspellheim.flowdesign;

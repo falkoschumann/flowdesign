@@ -9,39 +9,46 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Ein Output-Pin wird für ereignisbasierte Verbindungen zwischen Functional-Units verwendet.
+ * With an output pin a functional unit publishes output data.
+ * <p>
+ * An output data can consume by zero, one or more input pins.
  *
- * @param <T> der Typ des Output-Pins.
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @param <T> the type of output data.
+ * @author Falko Schumann
+ * @since 3.0
  */
 public class OutputPin<T> {
 
     private final List<InputPin<T>> wires = new CopyOnWriteArrayList<>();
 
     /**
-     * Verbindet den Output-Pin mit einem Input-Pin.
+     * Connect this output pin with an input pin.
      *
-     * @param inputPin der zu verbindende Input-Pin.
+     * @param inputPin an input pin.
      */
     public void connect(InputPin<T> inputPin) {
         wires.add(inputPin);
     }
 
     /**
-     * Trennt die Verbindung des Output-Pis mit einem Input-Pin.
+     * Disconnect an input pin from this output pin.
+     * <p>
+     * If the input pin is not connected with this output pin, this method does
+     * nothing.
      *
-     * @param inputPin der zu trennende Input-Pin.
+     * @param inputPin an input pin.
      */
     public void disconnect(InputPin<T> inputPin) {
         wires.remove(inputPin);
     }
 
     /**
-     * Veröffentlicht einen Wert für diesen Output-Pin als Ereignis.
+     * Publish an output data to all connected input pins.
      *
-     * @param output der zu veröffentlichende Wert.
+     * @param output an output data.
      */
     public void publish(T output) {
+        // TODO Delegate runtime exceptions to threads uncaught exception handler, like events
         wires.stream().forEach(in -> in.accept(output));
     }
 
