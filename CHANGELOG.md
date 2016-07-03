@@ -1,6 +1,12 @@
 Changelog for Flow-Design
 =========================
 
+Version 3.1.1-SNAPSHOT - [...]
+---------------------------------
+
+*   Placeholder for next release.
+
+
 Version 3.1.0 - Deploy to Bintray
 ---------------------------------
 

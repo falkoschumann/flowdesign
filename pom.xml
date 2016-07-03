@@ -12,7 +12,7 @@
 
     <groupId>de.muspellheim</groupId>
     <artifactId>flowdesign</artifactId>
-    <version>3.1.0</version>
+    <version>3.1.1-SNAPSHOT</version>
 
     <name>Flow Design</name>
     <description>A Java implementation of flow design.</description>
