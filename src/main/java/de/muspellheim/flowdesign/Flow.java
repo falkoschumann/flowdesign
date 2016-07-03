@@ -1,32 +1,34 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
 package de.muspellheim.flowdesign;
 
 /**
- * Basisklasse oder Beispielklasse für die Initialisierung eines Flows für eine Applikation. Die
- * {@code protected}-Methoden werden überschrieben, um die entsprechende Phase zu realisiereren.
+ * Base class or example to implement a flow application.
+ * <p>
+ * An implementation must override the protected methods as described and call
+ * {@link #initializeAndStart(String[])} in the main method.
  *
- * <ol>
- * <li>{@link #build()}</li>
- * <li>{@link #bind()}</li>
- * <li>{@link #inject()}</li>
- * <li>{@link #configure(String[])}</li>
- * <li>{@link #run(String[])}</li>
- * </ol>
- *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
+ * @since 3.0
  */
 public abstract class Flow {
 
     /**
-     * Schablonenmethode zur Initialisierung und zum Start des Flows.
+     * This template method initialize and start the application.
+     * <p>
+     * Calls the the following methods in the given order:
+     * <ol>
+     * <li>{@link #build()}</li>
+     * <li>{@link #bind()}</li>
+     * <li>{@link #inject()}</li>
+     * <li>{@link #configure(String[])}</li>
+     * <li>{@link #run(String[])}</li>
+     * </ol>
      *
-     * @param args die Kommandozeilenoptionen der Applikation.
+     * @param args the command line arguments of the application.
      */
     public final void initializeAndStart(String[] args) {
         build();
@@ -37,40 +39,39 @@ public abstract class Flow {
     }
 
     /**
-     * Diese Methode überschreiben, um in ihr die Functional-Units anzulegen.
+     * Override this method to create functional units before other methods are called.
      */
     protected void build() {
     }
 
     /**
-     * Diese Methode überschreiben, um in ihr die Output-Pins und Input-Pins der Functional-Units miteinander zu
-     * verbinden.
+     * Override this method to connect output pins with input pins of functional units.
      */
     protected void bind() {
     }
 
     /**
-     * Diese Methode überschreiben, um die Abhängigkeiten der Functional-Units in diese zu injizieren. Wenn
-     * Abhängigkeiten per Konstruktor injiziert werden, geschieht dies bereits in {@link #build()}.
+     * Override this method to inject dependencies in functional units.
      */
     protected void inject() {
     }
 
     /**
-     * Diese Methode überschreiben, um die Functional-Units zu konfigurieren. Die Kommandozeilenargumente der
-     * Applikation werden an die Functional-Units weitergereicht, die sie benötigen, damit diese ihre Konfiguration
-     * davon lesen können.
+     * Override this method to configure functional units.
+     * <p>
+     * The command line arguments are passed to functional units.
      *
-     * @param args die Kommandozeilenoptionen der Applikation.
+     * @param args the command line arguments of the application.
      */
     protected void configure(String[] args) {
     }
 
     /**
-     * Diese Methode überschreiben, um die Functional-Units die den Entry-Point des Flows darstellt zu starten.
-     * Der Entry-Point bekommt ebenfalls die Kommandozeilenargumente der Applikation übergeben.
+     * Override this method to start the application by call its entry point.
+     * <p>
+     * The command line arguments are passed also to the applications entry point.
      *
-     * @param args die Kommandozeilenoptionen der Applikation.
+     * @param args the command line arguments of the application.
      */
     protected void run(String[] args) {
     }

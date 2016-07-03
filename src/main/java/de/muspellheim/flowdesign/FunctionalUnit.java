@@ -1,16 +1,15 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
 package de.muspellheim.flowdesign;
 
 /**
- * Dieses Interface markiert eine Functional-Unit.
+ * Marks a class as functional unit (FU).
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
+ * @since 3.0
  */
 public interface FunctionalUnit {
 

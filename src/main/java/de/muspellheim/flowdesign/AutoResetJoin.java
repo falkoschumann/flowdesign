@@ -1,26 +1,28 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
 package de.muspellheim.flowdesign;
 
 /**
- * Verbindet zwei Inputs zu einem gemeinsamen Output als Tupel. Wenn beide Inputs eingetroffen sind, werden diese als
- * Tupel veröffentlicht und anschließend zurückgesetzt. Das bedeutet, jeder Input der eintriff, wird immer nur einmal
- * publiziert.
+ * Join two input data to one tuple.
+ * <p>
+ * Only publishes a tuple if both input data are received. So every input data
+ * is published only one time.
+ * <p>
+ * This behaviour differs from {@link Join}.
  *
- * @param <T> der Typ des ersten Input-Pins.
- * @param <U> der Typ des zweiten Input-Pins..
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @param <T> the type of first input data.
+ * @param <U> the type of second input data.
+ * @author Falko Schumann
  * @see Join
+ * @since 3.0
  */
 public class AutoResetJoin<T, U> extends Join<T, U> {
 
     /**
-     * Erzeugt einen Auto-Reset-Join.
+     * Creates a join.
      */
     public AutoResetJoin() {
         super(true);

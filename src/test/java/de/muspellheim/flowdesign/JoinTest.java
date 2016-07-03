@@ -1,7 +1,5 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
@@ -13,9 +11,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Unit-Tests für Join.
+ * Unit tests for @{link Join}.
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
  */
 public class JoinTest {
 

@@ -4,6 +4,6 @@
  */
 
 /**
- * API and implementation of a flow design framework for Java.
+ * Tests for the flow design framework.
  */
 package de.muspellheim.flowdesign;

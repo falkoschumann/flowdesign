@@ -1,43 +1,31 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
-package de.muspellheim.flowdesign;
+package de.muspellheim.flowdesign.example;
+
+import de.muspellheim.flowdesign.*;
 
 /**
- * Ein komplettes Beispielprogramm.
+ * A complete example flow application.
  *
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @author Falko Schumann
  */
-public class Program<T, S, U> {
+public class Program<T, S, U> extends Flow {
 
-    private String[] args;
     private Gui<U, T> gui;
     private R r;
     private A<T, S> a;
     private B<S, U> b;
     private X<T, S, U> x;
 
-    public Program(String[] args) {
-        this.args = args;
-    }
-
     public static void main(String[] args) {
-        new Program(args).start();
+        new Program().initializeAndStart(args);
     }
 
-    public void start() {
-        build();
-        bind();
-        inject();
-        configure();
-        run();
-    }
-
-    private void build() {
+    @Override
+    protected void build() {
         gui = new Gui<>();
         r = new R();
 
@@ -46,20 +34,24 @@ public class Program<T, S, U> {
         x = new X<>(a, b);
     }
 
-    private void bind() {
+    @Override
+    protected void bind() {
         gui.query().connect(x::process);
         x.result().connect(gui::display);
     }
 
-    private void inject() {
+    @Override
+    protected void inject() {
         b.inject(r);
     }
 
-    private void configure() {
+    @Override
+    protected void configure(String[] args) {
         a.configure(args);
     }
 
-    private void run() {
+    @Override
+    protected void run(String[] args) {
         gui.run(args);
     }
 
@@ -82,7 +74,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class A<T, S> extends BaseFunctionaUnit<T, S> implements Configurable {
+    private static class A<T, S> extends BaseFunctionalUnit<T, S> implements Configurable {
 
         @Override
         public void process(T input) {
@@ -96,7 +88,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class B<S, U> extends BaseFunctionaUnit<S, U> implements DependsOn<R> {
+    private static class B<S, U> extends BaseFunctionalUnit<S, U> implements DependsOn<R> {
 
         @Override
         public void process(S input) {
@@ -110,7 +102,7 @@ public class Program<T, S, U> {
 
     }
 
-    private static class X<T, S, U> extends BaseFunctionaUnit<T, U> {
+    private static class X<T, S, U> extends BaseFunctionalUnit<T, U> {
 
         private final InputPin<T> process;
 

@@ -1,25 +1,24 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
 package de.muspellheim.flowdesign;
 
 /**
- * Ein Input-Pin wird für ereignisbasierte Verbindungen zwischen Functional-Units verwendet.
+ * With an input pin a functional unit consumes input data.
  *
- * @param <T> der Typ der Daten am Pin.
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @param <T> the type of input data.
+ * @author Falko Schumann
+ * @since 3.0
  */
 @FunctionalInterface
 public interface InputPin<T> {
 
     /**
-     * Ein Input-Pin ist eine Methode mit einem Parameter und ohne Rückgabewert.
+     * Consume an input data.
      *
-     * @param input ein Eingangsdatum.
+     * @param input an input data.
      */
     void accept(T input);
 

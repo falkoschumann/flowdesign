@@ -1,7 +1,5 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
@@ -11,11 +9,12 @@ import java.text.MessageFormat;
 import java.util.Objects;
 
 /**
- * Ein Tuple ist eine Struktur aus zwei Elementen. Ein Tuple ist ein Wertobjekt.
+ * A tuple hold two data objects as one data object.
  *
- * @param <T> der Typ des ersten ELements.
- * @param <U> der Typ des zweiten Elements.
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @param <T> the type of the first element.
+ * @param <U> the type of the second element.
+ * @author Falko Schumann
+ * @since 3.0
  */
 public class Tuple<T, U> {
 
@@ -28,36 +27,39 @@ public class Tuple<T, U> {
     }
 
     /**
-     * Erzeugt ein neues Tuple.
+     * Creates a new tuple of two given data objects.
      *
-     * @param first  das erste Element des neuen Tuples.
-     * @param second das zweite Element des neuen Tuples.
-     * @param <T>    der Typ des ersten ELements.
-     * @param <U>    der Typ des zweiten Elements.
-     * @return ein Tuple mit den zwei Elementen.
+     * @param first  the tuples first element.
+     * @param second the tuples second element.
+     * @param <T>    the type of the first element.
+     * @param <U>    the type of the second element.
+     * @return a new tuple with the two elements.
      */
     public static <T, U> Tuple<T, U> of(T first, U second) {
-        return new Tuple(first, second);
+        return new Tuple<>(first, second);
     }
 
     /**
-     * Gibt das erste ELement des Tuples zurück.
+     * Returns the first element.
      *
-     * @return das erste Element.
+     * @return the first element.
      */
     public T getFirst() {
         return first;
     }
 
     /**
-     * Gibt das zweite ELement des Tuples zurück.
+     * Return the second element.
      *
-     * @return das zweite Element.
+     * @return the second element.
      */
     public U getSecond() {
         return second;
     }
 
+    /**
+     * Compares the two elements with {@link Object#equals(Object)}.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,11 +69,17 @@ public class Tuple<T, U> {
                 Objects.equals(second, tuple.second);
     }
 
+    /**
+     * Hashes the two elements.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(first, second);
     }
 
+    /**
+     * Returns a human readable representation of this tuple.
+     */
     @Override
     public String toString() {
         return MessageFormat.format("({0}, {1})", first, second);

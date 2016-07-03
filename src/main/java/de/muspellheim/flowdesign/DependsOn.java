@@ -1,25 +1,24 @@
 /*
- * Flow-Design for Java
- *
- * Copyright (c) 2015 Falko Schumann
+ * Copyright (c) 2016 Falko Schumann
  * Released under the terms of the MIT License (MIT).
  */
 
 package de.muspellheim.flowdesign;
 
 /**
- * Diese Schnittstelle dient dem Injizieren von expliziten Abhängigkeiten in eine Functional-Unit.
+ * Marks an functional unit need a dependency.
  *
- * @param <T> der Typ der Abhängigkeit.
- * @author Falko Schumann &lt;falko.schumann@muspellheim.de&gt;
+ * @param <T> the dependencies type.
+ * @author Falko Schumann
+ * @since 3.0
  */
 public interface DependsOn<T> {
 
     /**
-     * Injiziert die Abhängigkeit.
+     * Inject the dependency in the functional unit.
      *
-     * @param object die Abhängigkeit.
+     * @param dependency the dependency.
      */
-    void inject(T object);
+    void inject(T dependency);
 
 }

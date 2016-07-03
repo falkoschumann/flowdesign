@@ -1,38 +1,72 @@
-Flow-Design for Java [![Build Status](https://travis-ci.org/falkoschumann/flowdesign.svg?branch=master)](https://travis-ci.org/falkoschumann/flowdesign)
+[![Build Status](https://travis-ci.org/falkoschumann/java-flowdesign.svg?branch=develop)](https://travis-ci.org/falkoschumann/java-flowdesign)
+[![Download](https://api.bintray.com/packages/falkoschumann/maven/java-flowdesign/images/download.svg)](https://bintray.com/falkoschumann/maven/java-flowdesign)
+
+Flow Design for Java
 ====================
 
-Dieses Projekt enthält eine Java-Implementation der Flow-API die in den
-folgenden beiden Blogeinträgen vorgestellt wird:
+This implementation follows the idea of the following blog entries.
 
-  - [Flow-Design Cheat Sheet – Part I, Notation][1]
-  - [Flow-Design Cheat Sheet – Part II, Translation][2]
+*   [Flow-Design Cheat Sheet – Part I, Notation][1]
+*   [Flow-Design Cheat Sheet – Part II, Translation][2]
 
-Mit einer Implementierung der Code Kata *Bowling* aus diesem Blogeintrag:
+With an implementation of code kata *Bowling* from this blog entry:
 
-  - [Flowing Bowling Game Kata I][3] (Fehlt leider noch)
+*   [Flowing Bowling Game Kata I][3]
 
-Die folgenden Klassen im Ordner `src/test/java` zeigen wie die im Blog genannte
-Flow-API mit Java 8 realsiert werden kann:
+The following classes in folder `src/test/java` shows how to implement the flow
+API from blog with Java 8:
 
-  - `MethodsCheatSheet` zeigt die Überführung von Functional-Units in Methoden.
-  - `DelegatesCheatSheet` zeigt die Überführung von Functional-Units in Methoden
-    mit Delegation für Rückgabewerten.
-  - `EventsCheatSheet` zeigt die Überführung von Functional-Units in Ereignisse.
+*   `MethodsCheatSheet` shows how to transfer functional units into simple
+    methods.
+*   `DelegatesCheatSheet` shows how to transfer functional units into methods
+     with delegation to return values.
+*   `EventsCheatSheet` shows how to transfer functional units into classes with
+    events.
+*   `BowlingGame` shows how to implement the bowling kata with flow design.
 
-Ebenfalls im Ordner `src/test/java` befindet sich Klasse `Program` mit einem
-kompletten Programm.
+Also there is a class `Program` shows how to implement a complete program.
 
-Für den produktiven Einsatz sind die Klassen im Ordner `src/main/java`.
+For productive use there are following classes in the framework:
 
-  - `FunctionalUnit` ist eine Basisklasse für eine Functional-Unit mit genau
-    einem Input-Pin und einem Output-Pin.
-  - Die Klasse `OutputPin` dient als Output-Pin mit einem beliebige Namen.
-  - Das Functional-Interface `InputPut` definiert einen Input-Pin beliebigen
-    Namens.
-  - Die Klasse `Flow` dient als Basis für die Initialisierung und das Starten
-    eines Flows.
+*   `FunctionalUnit` is a base class or template for a functional unit with one
+    input pin and one output pin.
+*   Use class `OutputPin` as public final member or private member with getter
+    for output pins of a functional pins.
+*   Use functional interface `InputPut` as public method for input pins of a
+    functional pins.
+*   Use class `Flow` as template to design a flow application. This class
+    initialize and start the flow of the application
 
-Für weitere Klassen und Details verweise ich auf die Dokumentation im JavaDoc.
+### Creating Functional Units
+
+    public abstract class MyFunctionalUnit<I, O> {
+
+        public final OutputPin<O> result = new OutputPin<>();
+
+        public void process(I input) {
+            // process input and publish output
+            O output = ...
+            result.publish(output);
+        }
+
+    }
+
+
+### Creating Wires
+
+With one value:
+
+    MyFunctionalUnit<String, Integer> fu1 = new MyFunctionalUnit<>();
+    MyFunctionalUnit<Integer, String> fu2 = new MyFunctionalUnit<>();
+    fu1.result.connect(fu2::process());
+    fu1.result.publish("Foo");
+
+Without value:
+
+    MyFunctionalUnit<String, Void> fu1 = new MyFunctionalUnit<>();
+    MyFunctionalUnit<Void, String> fu2 = new MyFunctionalUnit<>();
+    fu1.result.connect(fu2::process());
+    fu1.result.publish(null);
 
 
 [1]: http://geekswithblogs.net/theArchitectsNapkin/archive/2011/03/19/flow-design-cheat-sheet-ndash-part-i-notation.aspx
