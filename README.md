@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/falkoschumann/java-flowdesign.svg?branch=develop)](https://travis-ci.org/falkoschumann/java-flowdesign)
+[![Build Status](https://travis-ci.org/falkoschumann/java-flowdesign.svg?branch=master)](https://travis-ci.org/falkoschumann/java-flowdesign)
 [![Download](https://api.bintray.com/packages/falkoschumann/maven/java-flowdesign/images/download.svg)](https://bintray.com/falkoschumann/maven/java-flowdesign)
 
 Flow Design for Java
