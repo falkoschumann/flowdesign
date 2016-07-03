@@ -3,17 +3,19 @@
  * Released under the terms of the MIT License (MIT).
  */
 
-package de.muspellheim.flowdesign;
+package de.muspellheim.flowdesign.example;
+
+import de.muspellheim.flowdesign.Tuple;
 
 /**
- * Zeigt wie Functional-Units in Methoden überführt werden können.
+ * Shows how to transfer functional units into simple methods.
  *
  * @author Falko Schumann
  */
 public class MethodsCheatSheet {
 
     /**
-     * Ein einfaches Beispiel einer Functional-Unit mit einem Input T und einem Output U.
+     * A simple example of a functional unit with one input pin T and one output pin U.
      */
     public <U, T> U a(T input) {
         U u = null;
@@ -22,7 +24,7 @@ public class MethodsCheatSheet {
     }
 
     /**
-     * Ein zusammengesetzten Beispiel. Die beiden Parts A und B werden zum Board X zusammengesteckt.
+     * A compound example. The parts A and B are compounded to board X.
      */
     public <U, S, T> U x(T input) {
         S s = a(input);
@@ -38,14 +40,14 @@ public class MethodsCheatSheet {
 
 
     /**
-     * Eine Functional-Unit mit zwei Input-Pins zu einem Tuple vereint.
+     * A functional unit with two input data as tuple.
      */
     public <T, U> void a(Tuple<T, U> input) {
         // ...
     }
 
     /**
-     * Eine Functional-Unit mit zwei Output-Pins zu einem Tuple vereint.
+     * A functional unit with two output data as tuple.
      */
     public <T, U> Tuple<T, U> a() {
         Tuple<T, U> t = null;
@@ -54,14 +56,14 @@ public class MethodsCheatSheet {
     }
 
     /**
-     * Eine Functional-Unit mit zwei Output-Pins als Output-Parameter.
+     * A functional unit with two output pins as output parameter.
      */
     public <T, U> void a(T outputT, U outputU) {
         // ...
     }
 
     /**
-     * Split von A auf B und C sowie Join von B und C auf D.
+     * This functional unit splits A into B and C and joins B and C into D.
      */
     public <T, U, S, V> void foo() {
         T t = null;

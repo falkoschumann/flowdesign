@@ -15,7 +15,7 @@ package de.muspellheim.flowdesign;
  */
 public abstract class BaseFunctionalUnit<I, O> {
 
-    private final OutputPin<O> result = new OutputPin<>();
+    public final OutputPin<O> result = new OutputPin<>();
 
     /**
      * The input pin of this functional unit.

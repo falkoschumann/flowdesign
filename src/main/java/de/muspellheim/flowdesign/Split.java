@@ -15,8 +15,8 @@ package de.muspellheim.flowdesign;
  */
 public class Split<T, U> {
 
-    private final OutputPin<T> output1 = new OutputPin<>();
-    private final OutputPin<U> output2 = new OutputPin<>();
+    public final OutputPin<T> output1 = new OutputPin<>();
+    public final OutputPin<U> output2 = new OutputPin<>();
 
     /**
      * The input pin receive a tuple.

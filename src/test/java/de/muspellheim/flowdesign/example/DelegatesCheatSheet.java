@@ -3,7 +3,9 @@
  * Released under the terms of the MIT License (MIT).
  */
 
-package de.muspellheim.flowdesign;
+package de.muspellheim.flowdesign.example;
+
+import de.muspellheim.flowdesign.Tuple;
 
 import java.util.function.Consumer;
 
@@ -16,7 +18,7 @@ import java.util.function.Consumer;
 public class DelegatesCheatSheet {
 
     /**
-     * A simple example of an functional unit with one input and one output.
+     * A simple example of a functional unit with one input pin T and one output pin U.
      */
     public <U, T> void a(T input, Consumer<U> output) {
         U u = null;
@@ -25,7 +27,7 @@ public class DelegatesCheatSheet {
     }
 
     /**
-     * A composite example. The parts A and B are put together to board X.
+     * A compound example. The parts A and B are compounded to board X.
      */
     public <U, S, T> void x(T input, Consumer<U> output) {
         a(input, s -> b(s, output::accept));
@@ -38,7 +40,7 @@ public class DelegatesCheatSheet {
     }
 
     /**
-     * A functional unit with two input pins joined to a tuple.
+     * A functional unit with two input data as tuple.
      */
     public <T, U> void a(Tuple<T, U> input) {
         // ...

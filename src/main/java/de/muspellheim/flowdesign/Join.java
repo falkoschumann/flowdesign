@@ -23,7 +23,7 @@ package de.muspellheim.flowdesign;
  */
 public class Join<T, U> {
 
-    private final OutputPin<Tuple<T, U>> output = new OutputPin<>();
+    public final OutputPin<Tuple<T, U>> output = new OutputPin<>();
 
     private final boolean autoReset;
 

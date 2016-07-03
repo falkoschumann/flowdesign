@@ -3,39 +3,29 @@
  * Released under the terms of the MIT License (MIT).
  */
 
-package de.muspellheim.flowdesign;
+package de.muspellheim.flowdesign.example;
+
+import de.muspellheim.flowdesign.*;
 
 /**
- * Ein komplettes Beispielprogramm.
+ * A complete example flow application.
  *
  * @author Falko Schumann
  */
-public class Program<T, S, U> {
+public class Program<T, S, U> extends Flow {
 
-    private String[] args;
     private Gui<U, T> gui;
     private R r;
     private A<T, S> a;
     private B<S, U> b;
     private X<T, S, U> x;
 
-    public Program(String[] args) {
-        this.args = args;
-    }
-
     public static void main(String[] args) {
-        new Program(args).start();
+        new Program().initializeAndStart(args);
     }
 
-    public void start() {
-        build();
-        bind();
-        inject();
-        configure();
-        run();
-    }
-
-    private void build() {
+    @Override
+    protected void build() {
         gui = new Gui<>();
         r = new R();
 
@@ -44,20 +34,24 @@ public class Program<T, S, U> {
         x = new X<>(a, b);
     }
 
-    private void bind() {
+    @Override
+    protected void bind() {
         gui.query().connect(x::process);
         x.result().connect(gui::display);
     }
 
-    private void inject() {
+    @Override
+    protected void inject() {
         b.inject(r);
     }
 
-    private void configure() {
+    @Override
+    protected void configure(String[] args) {
         a.configure(args);
     }
 
-    private void run() {
+    @Override
+    protected void run(String[] args) {
         gui.run(args);
     }
 
