@@ -12,7 +12,7 @@ This implementation follows the idea of the following blog entries.
 
 With an implementation of code kata *Bowling* from this blog entry:
 
-*   [Flowing Bowling Game Kata I][3] (TODO)
+*   [Flowing Bowling Game Kata I][3]
 
 The following classes in folder `src/test/java` shows how to implement the flow
 API from blog with Java 8:
@@ -23,6 +23,7 @@ API from blog with Java 8:
      with delegation to return values.
 *   `EventsCheatSheet` shows how to transfer functional units into classes with
     events.
+*   `BowlingGame` shows how to implement the bowling kata with flow design.
 
 Also there is a class `Program` shows how to implement a complete program.
 
