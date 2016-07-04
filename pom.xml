@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2016 Falko Schumann
-  ~ Released under the terms of the MIT License (MIT).
-  -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -21,7 +16,7 @@
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>
-            <url>LICENSE.txt</url>
+            <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
 
