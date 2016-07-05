@@ -2,8 +2,17 @@
 [![Download](https://api.bintray.com/packages/falkoschumann/maven/flowdesign/images/download.svg)](https://bintray.com/falkoschumann/maven/flowdesign)
 
 
-Flow Design for Java
-====================
+Flow Design
+===========
+
+With flow design objects are independent functional units. This functional units
+communicate only by messages. A message is a data structure that flow from a
+sender to a receiver. The sender obtain no return value synchronously. An answer
+flow also as message from a sender to receiver.
+
+
+Introduction
+------------
 
 This implementation follows the idea of the following blog entries.
 
@@ -27,7 +36,11 @@ API from blog with Java 8:
 
 Also there is a class `Program` shows how to implement a complete program.
 
-For productive use there are following classes in the framework:
+
+Usage
+-----
+
+The key classes are
 
 *   `FunctionalUnit` is a base class or template for a functional unit with one
     input pin and one output pin.
