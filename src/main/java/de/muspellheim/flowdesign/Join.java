@@ -7,13 +7,11 @@ package de.muspellheim.flowdesign;
 
 /**
  * Join two input data to one tuple.
- * <p>
- * Every time an input data is received a tuple of the two current objects is
+ * <p>Every time an input data is received a tuple of the two current objects is
  * published. If an input element is received twice the published tuple holds
  * the same other element. The first tuple is published if both input data are
- * received.
- * <p>
- * This behaviour differs from {@link AutoResetJoin}.
+ * received.</p>
+ * <p>This behaviour differs from {@link AutoResetJoin}.</p>
  *
  * @param <T> the type of first input data.
  * @param <U> the type of second input data.

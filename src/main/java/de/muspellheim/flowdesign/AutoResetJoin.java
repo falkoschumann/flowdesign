@@ -7,11 +7,9 @@ package de.muspellheim.flowdesign;
 
 /**
  * Join two input data to one tuple.
- * <p>
- * Only publishes a tuple if both input data are received. So every input data
- * is published only one time.
- * <p>
- * This behaviour differs from {@link Join}.
+ * <p>Only publishes a tuple if both input data are received. So every input
+ * data is published only one time.</p>
+ * <p>This behaviour differs from {@link Join}.</p>
  *
  * @param <T> the type of first input data.
  * @param <U> the type of second input data.

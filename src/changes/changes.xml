@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+
+    <properties>
+        <title>Flow Design</title>
+        <author email="falko.schumann@muspellheim.de">Falko Schumann</author>
+    </properties>
+
+    <!-- action types: add, fix, update, remove -->
+    <body>
+        <release version="3.2.0" date="2016-07-10" description="SNAPSHOT">
+            <action dev="falkoschumann" type="change">
+                `OutputPin` delegates exceptions on `publish` to uncaught exception handler of current thread. So an
+                exception does not break publishing messages.
+            </action>
+        </release>
+
+        <release version="3.1.0" date="2016-07-03" description="Deploy to Bintray">
+            <action dev="falkoschumann" type="add">
+                The JAR is also an OSGi bundle.
+            </action>
+            <action dev="falkoschumann" type="update">
+                Deploy to Bintray with optional profile.
+            </action>
+        </release>
+
+        <release version="3.0.0" date="2015-07-11" description="Neustart des Flow-Frameworks">
+            <action dev="falkoschumann" type="add">
+               Input-Pins, Output-Pins einschließlich deren Verknüpfung (`InputPin`, `OutputPin`).
+            </action>
+            <action dev="falkoschumann" type="add">
+                Basisklasse für eine Functional-Unit mit genau einem Input-Pin und Output-Pin (`FunctionalUnit`).
+            </action>
+            <action dev="falkoschumann" type="add">
+                Basisklasse für die Initialisierung das Starten eines Flows (`Flow`).
+            </action>
+            <action dev="falkoschumann" type="add">
+                Schnittstelle für die Phasen der Flow-Initalisierung (`DependsOn`, `Configurable`, `EntryPoint`).
+            </action>
+            <action dev="falkoschumann" type="add">
+                `Tuple`, `Map`, `Join`, `Split`.
+            </action>
+        </release>
+
+        <release version="2.0.0" date="2015-06-18" description="Replace interfaces with annotations">
+            <action dev="falkoschumann" type="remove">
+                Interfaces DependsOn and Configurable removed.
+            </action>
+            <action dev="falkoschumann" type="update">
+                Replaced interface DependsOn with annotation @Inject.
+            </action>
+            <action dev="falkoschumann" type="update">
+                Replaced interface Configurable with annotation @Configure.
+            </action>
+            <action dev="falkoschumann" type="change">
+                Naming connect and disconnect methods of functional units more clean.
+            </action>
+        </release>
+
+        <release version="1.0.1" date="2015-06-17" description="Improve generics">
+            <action dev="falkoschumann" type="update">
+                Improve using generics in FunctionalUnitSupport. Now methods accept collections as wire type also.
+            </action>
+        </release>
+
+        <release version="1.0.0" date="2015-06-16" description="First release">
+            <action dev="falkoschumann" type="add">
+                Contains Flow Design API and helper class for implementing functional units.
+            </action>
+        </release>
+
+    </body>
+
+</document>

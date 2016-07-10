@@ -9,8 +9,7 @@ import java.util.function.Function;
 
 /**
  * This functional unit does a type mapping.
- * <p>
- * The mapping can be set with an mapper function in constructor.
+ * <p>The mapping can be set with an mapper function in constructor.</p>
  *
  * @param <T> the type of input data.
  * @param <U> the type of output data.
@@ -32,8 +31,7 @@ public class Map<T, U> extends BaseFunctionalUnit<T, U> {
 
     /**
      * Convert input data to output data.
-     * <p>
-     * The output data is published on the output pin {@link #result()}.
+     * <p>The output data is published on the output pin {@link #result()}.</p>
      *
      * @param input an input data.
      */

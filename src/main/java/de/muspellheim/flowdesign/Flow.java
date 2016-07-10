@@ -7,9 +7,8 @@ package de.muspellheim.flowdesign;
 
 /**
  * Base class or example to implement a flow application.
- * <p>
- * An implementation must override the protected methods as described and call
- * {@link #initializeAndStart(String[])} in the main method.
+ * <p>An implementation must override the protected methods as described and
+ * call {@link #initializeAndStart(String[])} in the main method.</p>
  *
  * @author Falko Schumann
  * @since 3.0
@@ -18,8 +17,7 @@ public abstract class Flow {
 
     /**
      * This template method initialize and start the application.
-     * <p>
-     * Calls the the following methods in the given order:
+     * <p>Calls the the following methods in the given order:</p>
      * <ol>
      * <li>{@link #build()}</li>
      * <li>{@link #bind()}</li>
@@ -58,8 +56,7 @@ public abstract class Flow {
 
     /**
      * Override this method to configure functional units.
-     * <p>
-     * The command line arguments are passed to functional units.
+     * <p>The command line arguments are passed to functional units.</p>
      *
      * @param args the command line arguments of the application.
      */
@@ -68,8 +65,7 @@ public abstract class Flow {
 
     /**
      * Override this method to start the application by call its entry point.
-     * <p>
-     * The command line arguments are passed also to the applications entry point.
+     * <p>The command line arguments are passed also to the applications entry point.</p>
      *
      * @param args the command line arguments of the application.
      */

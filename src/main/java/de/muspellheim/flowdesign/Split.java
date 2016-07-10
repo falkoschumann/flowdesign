@@ -20,9 +20,9 @@ public class Split<T, U> {
 
     /**
      * The input pin receive a tuple.
-     * <p>
-     * If a tuple is received, first element is published on {@link #output1()}
-     * and second element is published on {@link #output2()}.
+     * <p>If a tuple is received, first element is published on
+     * {@link #output1()} and second element is published on
+     * {@link #output2()}.</p>
      *
      * @param input a tuple.
      */

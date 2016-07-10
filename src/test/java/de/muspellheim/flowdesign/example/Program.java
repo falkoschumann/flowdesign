@@ -106,7 +106,7 @@ public class Program<T, S, U> extends Flow {
 
         private final InputPin<T> process;
 
-        public X(A<T, S> a, B<S, U> b) {
+        X(A<T, S> a, B<S, U> b) {
             process = a::process;
             a.result().connect(b::process);
             b.result().connect(this.result()::publish);

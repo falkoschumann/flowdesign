@@ -15,7 +15,11 @@ import java.util.stream.IntStream;
  *
  * @author Falko Schumann
  */
-public class BowlingGame {
+public final class BowlingGame {
+
+    private BowlingGame() {
+        // utility class
+    }
 
     public static int calculateTotal(int[] rolls) {
         List<Frame> frames = toFrames(rolls);
@@ -88,6 +92,9 @@ public class BowlingGame {
         return frames;
     }
 
+    /**
+     * A frame with one, two or three rolls.
+     */
     public static class Frame {
 
         public int[] rolls = new int[2];

@@ -16,7 +16,7 @@ import java.util.Objects;
  * @author Falko Schumann
  * @since 3.0
  */
-public class Tuple<T, U> {
+public final class Tuple<T, U> {
 
     private final T first;
     private final U second;

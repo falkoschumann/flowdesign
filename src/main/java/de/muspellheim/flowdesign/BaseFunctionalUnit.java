@@ -19,8 +19,8 @@ public abstract class BaseFunctionalUnit<I, O> {
 
     /**
      * The input pin of this functional unit.
-     * <p>
-     * Override this method to receive input data and publish a result with {@link #result()}.
+     * <p>Override this method to receive input data and publish a result with
+     * {@link #result()}.</p>
      *
      * @param input an input data.
      * @see #result()
@@ -29,8 +29,7 @@ public abstract class BaseFunctionalUnit<I, O> {
 
     /**
      * The output pin of this functional unit.
-     * <p>
-     * Use the output pin to publish output data.
+     * <p>Use the output pin to publish output data.</p>
      *
      * @return the functional units output pin.
      */

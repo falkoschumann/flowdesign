@@ -22,7 +22,7 @@ public class EventsCheatSheet {
     /**
      * A simple example of a functional unit with one input pin T and one output pin U.
      */
-    public class A<T, U> {
+    public static class A<T, U> {
 
         public final OutputPin<U> result = new OutputPin<>();
 
@@ -32,7 +32,7 @@ public class EventsCheatSheet {
 
     }
 
-    public class A1<T, S, U, V> {
+    public static class A1<T, S, U, V> {
 
         public final OutputPin<U> error = new OutputPin<>();
         public final OutputPin<V> dataLoaded = new OutputPin<>();
@@ -50,7 +50,7 @@ public class EventsCheatSheet {
     /**
      * A compound example. The parts A and B are compounded to board X.
      */
-    public class X<T, S, U> {
+    public static class X<T, S, U> {
 
         public OutputPin<U> result;
         private InputPin<T> process;
@@ -67,7 +67,7 @@ public class EventsCheatSheet {
 
     }
 
-    public class B<T, U> {
+    public static class B<T, U> {
 
         public final OutputPin<U> result = new OutputPin<>();
 
@@ -93,7 +93,7 @@ public class EventsCheatSheet {
         j.output.connect(c::process);
     }
 
-    public class C<T, U> {
+    public static class C<T, U> {
 
         public final OutputPin<U> result = new OutputPin<>();
 
@@ -106,7 +106,7 @@ public class EventsCheatSheet {
     /**
      * Publish a sequence of elements as individual output data.
      */
-    public class SplitLineIntoWords {
+    public static class SplitLineIntoWords {
 
         public final OutputPin<String> result = new OutputPin<>();
 
@@ -120,7 +120,7 @@ public class EventsCheatSheet {
     /**
      * Publish a sequence of elements as iterator.
      */
-    public class SplitLineIntoWordsWithIterator {
+    public static class SplitLineIntoWordsWithIterator {
 
         public final OutputPin<Iterator<String>> result = new OutputPin<>();
 
